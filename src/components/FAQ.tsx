@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { AccentItalic, SectionHeading } from "./primitives";
+import {
+  AccentItalic,
+  GlassCard,
+  GlowOrb,
+  NoiseLayer,
+  SectionHeading,
+} from "./primitives";
 
 const FAQS = [
   {
@@ -35,10 +41,17 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="bg-canvas pt-4 pb-20 md:pt-8 md:pb-28 xl:pb-36"
-      style={{ scrollMarginTop: 68 }}
+      className="relative isolate overflow-hidden section-pad-md"
+      style={{ scrollMarginTop: 96 }}
     >
-      <div className="container-page grid gap-12 md:grid-cols-[5fr_7fr]">
+      <GlowOrb
+        size={460}
+        color="rgba(224, 255, 79, 0.08)"
+        className="-bottom-24 left-1/4"
+      />
+      <NoiseLayer />
+
+      <div className="container-page relative z-10 grid gap-12 md:grid-cols-[5fr_7fr]">
         <SectionHeading
           eyebrow="Frequently asked"
           title={
@@ -49,53 +62,60 @@ export function FAQ() {
           description="The things prospective clients actually ask us. If yours isn't here, send it — we'll answer plainly."
         />
 
-        <div className="border-t border-line-soft">
-          {FAQS.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <div key={i} className="border-b border-line-soft">
-                <button
-                  type="button"
-                  aria-expanded={isOpen}
-                  aria-controls={`faq-${i}`}
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className={`flex w-full cursor-pointer items-center justify-between gap-4 border-none bg-transparent py-5 text-left text-[15px] font-medium transition-colors duration-200 ${
-                    isOpen ? "text-ink" : "text-ink hover:text-accent"
-                  }`}
+        <GlassCard className="overflow-hidden p-2 md:p-4">
+          <div>
+            {FAQS.map((f, i) => {
+              const isOpen = open === i;
+              return (
+                <div
+                  key={i}
+                  className={
+                    i !== FAQS.length - 1 ? "border-b border-white/12" : ""
+                  }
                 >
-                  <span>{f.q}</span>
-                  <span
-                    className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-                      isOpen
-                        ? "border-ink bg-ink text-canvas"
-                        : "border-line-soft text-muted"
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-${i}`}
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className={`flex w-full cursor-pointer items-center justify-between gap-4 rounded-2xl border-none bg-transparent px-5 py-5 text-left text-[15.5px] font-medium transition-colors duration-200 hover:bg-white/45 ${
+                      isOpen ? "text-ink" : "text-ink hover:text-accent"
                     }`}
                   >
-                    <ChevronDown
-                      className={`h-3.5 w-3.5 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
+                    <span>{f.q}</span>
+                    <span
+                      className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                        isOpen
+                          ? "bg-ink text-canvas"
+                          : "border border-white/12 bg-white/10 text-muted"
                       }`}
-                      aria-hidden
-                    />
-                  </span>
-                </button>
-                <div
-                  id={`faq-${i}`}
-                  role="region"
-                  className="accordion-content"
-                  data-state={isOpen ? "open" : "closed"}
-                  aria-hidden={!isOpen}
-                >
-                  <div>
-                    <p className="pb-5 pr-10 text-[15px] leading-[1.65] text-muted">
-                      {f.a}
-                    </p>
+                    >
+                      <ChevronDown
+                        className={`h-3.5 w-3.5 transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                        aria-hidden
+                      />
+                    </span>
+                  </button>
+                  <div
+                    id={`faq-${i}`}
+                    role="region"
+                    className="accordion-content"
+                    data-state={isOpen ? "open" : "closed"}
+                    aria-hidden={!isOpen}
+                  >
+                    <div>
+                      <p className="px-5 pb-5 pr-12 text-[15px] leading-[1.7] text-muted">
+                        {f.a}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </GlassCard>
       </div>
     </section>
   );

@@ -1,4 +1,10 @@
-import { AccentItalic, SectionHeading } from "./primitives";
+import {
+  AccentItalic,
+  GlassCard,
+  GlowOrb,
+  NoiseLayer,
+  SectionHeading,
+} from "./primitives";
 
 const WHY = [
   {
@@ -22,10 +28,17 @@ export function WhyUs() {
   return (
     <section
       id="why-us"
-      className="border-t border-line-soft bg-canvas py-20 md:py-28 xl:py-36"
-      style={{ scrollMarginTop: 68 }}
+      className="relative isolate overflow-hidden section-pad-md"
+      style={{ scrollMarginTop: 96 }}
     >
-      <div className="container-page">
+      <GlowOrb
+        size={500}
+        color="rgba(224, 255, 79, 0.09)"
+        className="top-1/3 -right-32"
+      />
+      <NoiseLayer />
+
+      <div className="container-page relative z-10">
         <SectionHeading
           eyebrow="Why clients stay"
           title={
@@ -36,30 +49,32 @@ export function WhyUs() {
           }
         />
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
           {WHY.map((p) => (
-            <article
+            <GlassCard
               key={p.k}
-              className="card-hover rounded-2xl border border-line-soft bg-surface px-9 pt-8 pb-9"
+              as="article"
+              interactive
+              className="px-9 pt-8 pb-10"
             >
               <div className="flex items-center justify-between">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 bg-canvas-soft text-xs font-medium text-ink">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-white/12 text-[12px] font-medium tracking-tight text-ink backdrop-blur">
                   {p.k}
                 </span>
                 <span
                   aria-hidden
-                  className="h-1.5 w-1.5 rounded-full bg-accent/40"
+                  className="h-1.5 w-1.5 rounded-full bg-accent/55"
                 />
               </div>
 
-              <h3 className="mt-9 font-serif text-[26px] font-normal leading-[1.15] tracking-[-0.015em] text-ink">
+              <h3 className="mt-9 font-serif text-[26px] font-normal leading-[1.18] tracking-[-0.02em] text-ink">
                 {p.title}
               </h3>
 
-              <p className="mt-4 text-[15px] leading-[1.65] text-muted">
+              <p className="mt-4 text-[15px] leading-[1.7] text-muted">
                 {p.body}
               </p>
-            </article>
+            </GlassCard>
           ))}
         </div>
       </div>

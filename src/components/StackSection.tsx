@@ -8,6 +8,7 @@ import {
   Server,
   type LucideIcon,
 } from "lucide-react";
+import { GlassCard, GlowOrb, NoiseLayer } from "./primitives";
 
 const STACK_GROUPS: Array<{
   title: string;
@@ -57,15 +58,27 @@ const PRINCIPLES = ["Typed contracts", "Operational visibility", "Portable archi
 
 export function StackSection() {
   return (
-    <section className="border-y border-line-soft bg-surface py-16 md:py-20">
-      <div className="container-page">
-        <div className="grid gap-8 lg:grid-cols-[0.82fr_1.45fr] lg:items-stretch">
-          <div className="flex min-h-[360px] flex-col justify-between rounded-[24px] bg-ink p-7 text-white md:p-9">
-            <div>
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-accent text-white">
+    <section className="relative isolate overflow-hidden section-pad-md" aria-label="Our stack">
+      <GlowOrb
+        size={520}
+        color="rgba(120, 190, 195, 0.22)"
+        className="-top-40 left-1/4"
+      />
+      <NoiseLayer />
+      <div className="container-page relative z-10">
+        <div className="grid gap-5 lg:grid-cols-[0.85fr_1.4fr] lg:items-stretch">
+          <div className="relative flex min-h-[360px] flex-col justify-between overflow-hidden rounded-[var(--radius-card-lg)] glass-dark p-7 md:p-9">
+            <GlowOrb
+              size={420}
+              color="rgba(224, 255, 79, 0.13)"
+              className="-bottom-32 -left-20"
+            />
+            <NoiseLayer />
+            <div className="relative z-10">
+              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-accent text-canvas shadow-[var(--shadow-pop)]">
                 <Bot className="h-5 w-5" aria-hidden />
               </div>
-              <p className="mt-7 text-[11px] font-medium uppercase tracking-[0.18em] text-accent-soft">
+              <p className="mt-7 text-[11px] font-medium uppercase tracking-[0.2em] text-accent-soft">
                 Core stack
               </p>
               <h2 className="text-h2 mt-4 text-white">
@@ -78,11 +91,11 @@ export function StackSection() {
               </p>
             </div>
 
-            <div className="mt-9 flex flex-wrap gap-2.5">
+            <div className="relative z-10 mt-9 flex flex-wrap gap-2">
               {PRINCIPLES.map((principle) => (
                 <span
                   key={principle}
-                  className="rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[12.5px] font-medium text-white/85"
+                  className="rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[12.5px] font-medium text-white/85 backdrop-blur"
                 >
                   {principle}
                 </span>
@@ -92,12 +105,14 @@ export function StackSection() {
 
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {STACK_GROUPS.map(({ title, description, items, Icon }) => (
-              <article
+              <GlassCard
                 key={title}
-                className="flex min-h-[230px] flex-col rounded-[20px] border border-line-soft bg-canvas px-5 py-5 transition duration-200 hover:border-ink/25 hover:bg-canvas-soft"
+                as="article"
+                interactive
+                className="flex min-h-[230px] flex-col p-6"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-surface text-accent ring-1 ring-line-soft">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/12 text-accent ring-1 ring-white/15 backdrop-blur">
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
                   <span className="mt-1 h-2 w-2 rounded-full bg-accent" aria-hidden />
@@ -110,17 +125,17 @@ export function StackSection() {
                   {description}
                 </p>
 
-                <div className="mt-auto flex flex-wrap gap-2 pt-6">
+                <div className="mt-auto flex flex-wrap gap-1.5 pt-6">
                   {items.map((item) => (
                     <span
                       key={item}
-                      className="rounded-full border border-line-soft bg-surface px-2.5 py-1.5 text-[12px] font-medium text-ink-soft"
+                      className="rounded-full border border-white/12 bg-white/10 px-2.5 py-1 text-[12px] font-medium text-ink-soft backdrop-blur"
                     >
                       {item}
                     </span>
                   ))}
                 </div>
-              </article>
+              </GlassCard>
             ))}
           </div>
         </div>

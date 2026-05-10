@@ -1,4 +1,10 @@
-import { AccentItalic, SectionHeading } from "./primitives";
+import {
+  AccentItalic,
+  GlassCard,
+  GlowOrb,
+  NoiseLayer,
+  SectionHeading,
+} from "./primitives";
 
 const PHASES = [
   {
@@ -31,10 +37,17 @@ export function Process() {
   return (
     <section
       id="process"
-      className="bg-canvas pt-4 pb-20 md:pt-8 md:pb-28 xl:pb-36"
-      style={{ scrollMarginTop: 68 }}
+      className="relative isolate overflow-hidden section-pad-md"
+      style={{ scrollMarginTop: 96 }}
     >
-      <div className="container-page">
+      <GlowOrb
+        size={500}
+        color="rgba(224, 255, 79, 0.08)"
+        className="-bottom-20 right-1/4"
+      />
+      <NoiseLayer />
+
+      <div className="container-page relative z-10">
         <SectionHeading
           eyebrow="How we work"
           title={
@@ -46,32 +59,42 @@ export function Process() {
           description="Most engagements fail in the handoffs between phases, not inside them. Ours is designed to make those handoffs obvious, short, and well-documented."
         />
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {PHASES.map((p) => (
-            <article
-              key={p.step}
-              className="card-hover rounded-2xl border border-line-soft bg-surface px-7 pt-7 pb-8"
-            >
-              <div className="flex items-baseline justify-between">
-                <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
-                  Phase {p.step}
-                </span>
-                <span className="text-[11px] uppercase tracking-[0.14em] text-muted">
-                  {p.dur}
-                </span>
-              </div>
+        <div className="relative mt-14">
+          {/* Connector line */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent xl:block"
+          />
 
-              <h3 className="mt-7 font-serif text-[28px] font-normal tracking-[-0.02em] text-ink">
-                {p.title}
-              </h3>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {PHASES.map((p) => (
+              <GlassCard
+                key={p.step}
+                as="article"
+                interactive
+                className="px-7 pt-7 pb-8"
+              >
+                <div className="flex items-baseline justify-between">
+                  <span className="inline-flex h-7 items-center rounded-full bg-accent/12 px-3 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
+                    Phase {p.step}
+                  </span>
+                  <span className="text-[11px] uppercase tracking-[0.14em] text-muted">
+                    {p.dur}
+                  </span>
+                </div>
 
-              <div className="hairline mt-4" />
+                <h3 className="mt-7 font-serif text-[28px] font-normal tracking-[-0.025em] text-ink">
+                  {p.title}
+                </h3>
 
-              <p className="mt-4 text-[15px] leading-[1.65] text-muted">
-                {p.body}
-              </p>
-            </article>
-          ))}
+                <div className="hairline mt-4" />
+
+                <p className="mt-4 text-[15px] leading-[1.7] text-muted">
+                  {p.body}
+                </p>
+              </GlassCard>
+            ))}
+          </div>
         </div>
       </div>
     </section>

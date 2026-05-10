@@ -1,6 +1,12 @@
 import { Boxes, Cpu } from "lucide-react";
 import type { ReactNode } from "react";
-import { AccentItalic, ArrowRight, SectionHeading } from "./primitives";
+import {
+  AccentItalic,
+  ArrowRight,
+  GlowOrb,
+  NoiseLayer,
+  SectionHeading,
+} from "./primitives";
 
 const CLIENT_CAPS = [
   "Custom web applications & SaaS platforms",
@@ -45,23 +51,34 @@ function ServiceCard({
 }: ServiceCardProps) {
   return (
     <article
-      className={`flex h-full flex-col overflow-hidden rounded-[24px] px-7 pt-7 pb-7 transition-shadow duration-300 md:px-9 md:pt-9 md:pb-8 ${
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card-lg)] px-7 pt-8 pb-7 transition-all duration-300 md:px-9 md:pt-10 md:pb-9 ${
         dark
-          ? "border border-[#2c241d] bg-[#17130f] text-canvas hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.45)]"
-          : "border border-line-soft bg-surface text-ink hover:shadow-[0_18px_32px_-24px_rgba(20,19,15,0.18)]"
+          ? "glass-dark text-ink hover:shadow-[0_30px_60px_-28px_rgba(0,0,0,0.55)]"
+          : "glass-card hover:-translate-y-1"
       }`}
     >
-      <div className="flex items-center gap-3">
+      {dark && (
+        <GlowOrb
+          size={360}
+          color="rgba(224, 255, 79, 0.13)"
+          className="-bottom-32 -right-24"
+        />
+      )}
+      {dark && <NoiseLayer />}
+
+      <div className="relative z-10 flex items-center gap-3">
         <span
-          className={`inline-flex h-10 w-10 items-center justify-center rounded-xl ${
-            dark ? "bg-white/10 text-white" : "bg-canvas-soft text-ink"
+          className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${
+            dark
+              ? "bg-white/10 text-white backdrop-blur"
+              : "bg-white/12 text-ink ring-1 ring-white/15 backdrop-blur"
           }`}
         >
           {icon}
         </span>
         <span
-          className={`text-[11px] font-medium uppercase tracking-[0.16em] ${
-            dark ? "text-white/50" : "text-muted"
+          className={`text-[11px] font-medium uppercase tracking-[0.18em] ${
+            dark ? "text-white/55" : "text-muted"
           }`}
         >
           {index}
@@ -69,33 +86,35 @@ function ServiceCard({
       </div>
 
       <h3
-        className={`text-h3 mt-10 font-normal ${dark ? "text-white" : "text-ink"}`}
+        className={`relative z-10 text-h3 mt-9 font-normal ${
+          dark ? "text-white" : "text-ink"
+        }`}
       >
         {title}
       </h3>
 
       <p
-        className={`mt-4 text-[17px] italic leading-[1.45] ${
-          dark ? "text-[#ffd8ca]" : "text-accent"
+        className={`relative z-10 mt-4 text-[17px] italic leading-[1.45] ${
+          dark ? "text-accent-soft" : "text-accent"
         }`}
       >
         {tagline}
       </p>
 
       <p
-        className={`mt-5 text-[15px] leading-[1.7] ${
-          dark ? "text-white/72" : "text-muted"
+        className={`relative z-10 mt-5 text-[15px] leading-[1.7] ${
+          dark ? "text-white/72" : "text-ink-soft"
         }`}
       >
         {description}
       </p>
 
-      <ul className="mt-8 mb-10 flex list-none flex-col gap-3.5 p-0">
+      <ul className="relative z-10 mt-8 mb-10 flex list-none flex-col gap-3 p-0">
         {capabilities.map((c) => (
           <li
             key={c}
-            className={`flex items-start gap-3 text-sm leading-[1.45] ${
-              dark ? "text-white/85" : "text-ink-soft"
+            className={`flex items-start gap-3 text-[14.5px] leading-[1.55] ${
+              dark ? "text-white/82" : "text-ink-soft"
             }`}
           >
             <span
@@ -110,20 +129,20 @@ function ServiceCard({
       </ul>
 
       <div
-        className={`mt-auto border-t pt-6 ${
-          dark ? "border-white/10" : "border-line-soft"
+        className={`relative z-10 mt-auto border-t pt-6 ${
+          dark ? "border-white/10" : "border-white/12"
         }`}
       >
         <a
           href={href}
-          className={`group inline-flex cursor-pointer items-center gap-2 text-sm font-medium no-underline transition-colors duration-200 ${
+          className={`group/cta inline-flex cursor-pointer items-center gap-2 text-[14px] font-medium no-underline transition-colors duration-200 ${
             dark
-              ? "text-canvas hover:text-accent-soft"
+              ? "text-ink hover:text-accent-soft"
               : "text-ink hover:text-accent"
           }`}
         >
           {ctaLabel}
-          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1" />
         </a>
       </div>
     </article>
@@ -134,10 +153,17 @@ export function Services() {
   return (
     <section
       id="services"
-      className="border-t border-line-soft bg-canvas py-20 md:py-28 xl:py-36"
-      style={{ scrollMarginTop: 68 }}
+      className="relative isolate overflow-hidden section-pad-md"
+      style={{ scrollMarginTop: 96 }}
     >
-      <div className="container-page">
+      <GlowOrb
+        size={520}
+        color="rgba(224, 255, 79, 0.09)"
+        className="-top-32 -right-20"
+      />
+      <NoiseLayer />
+
+      <div className="container-page relative z-10">
         <SectionHeading
           eyebrow="Services"
           title={
@@ -167,8 +193,8 @@ export function Services() {
             tagline="We build what we wish existed."
             description="Our internal practice funds focused R&D: developer platforms, AI tooling, and infrastructure patterns we spin out as products or offer to clients as battle-tested starting points."
             capabilities={STUDIO_CAPS}
-            href="#featured-offering"
-            ctaLabel="Explore Stacktrace"
+            href="#contact"
+            ctaLabel="Talk about studio work"
             icon={<Cpu className="h-5 w-5" aria-hidden />}
             dark
           />

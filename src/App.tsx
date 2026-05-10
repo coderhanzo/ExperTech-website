@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
+import { TrustStrip } from "./components/TrustStrip";
 import { StackSection } from "./components/StackSection";
 import { Story } from "./components/Story";
 import { Services } from "./components/Services";
 import { Work } from "./components/Work";
 import { Process } from "./components/Process";
 import { WhyUs } from "./components/WhyUs";
-import { FeaturedOffering } from "./components/FeaturedOffering";
 import { Testimonials } from "./components/Testimonials";
-import { Team } from "./components/Team";
 import { FAQ } from "./components/FAQ";
 import { Contact } from "./components/Contact";
 import { FinalCta } from "./components/FinalCta";
@@ -22,9 +21,7 @@ const SECTION_IDS = [
   "work",
   "process",
   "why-us",
-  "featured-offering",
   "testimonials",
-  "team",
   "faq",
   "contact",
   "final-cta",
@@ -66,15 +63,14 @@ export default function App() {
       <Header activeSection={active} />
       <main id="main">
         <Hero />
+        <TrustStrip />
         <StackSection />
         <Story />
         <Services />
         <Work />
         <Process />
         <WhyUs />
-        <FeaturedOffering />
         <Testimonials />
-        <Team />
         <FAQ />
         <Contact />
         <FinalCta />
