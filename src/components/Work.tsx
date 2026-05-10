@@ -25,7 +25,7 @@ interface Case {
 const CASES: Case[] = [
   {
     num: "01",
-    year: "2025",
+    year: "2026",
     title: "E-commerce & booking app for a salon",
     desc: "Appointment booking and an in-app store rolled into one custom-backend system. Clients book slots and shop the salon's product line; the team manages bookings, products, and orders from a single admin console.",
     category: "Beauty · Mobile + e-commerce + custom backend",
@@ -34,7 +34,7 @@ const CASES: Case[] = [
   },
   {
     num: "02",
-    year: "2025",
+    year: "2026",
     title: "Recipe portfolio site for a private chef",
     desc: "A web portfolio for the chef to publish and manage their recipe library — a clean, searchable showcase backed by a custom CMS, so new recipes go live without touching code.",
     category: "Lifestyle · Web portfolio + recipe CMS",
@@ -45,7 +45,7 @@ const CASES: Case[] = [
   },
   {
     num: "03",
-    year: "2024",
+    year: "2025",
     title: "KwikMart — shop-from-home app & ops console",
     desc: "Customer mobile app that lets shoppers order from home, paired with a management console the mart uses to run inventory, orders, and day-to-day operations — all on one custom backend.",
     category: "Shopping · Mobile + admin console + custom backend",
@@ -56,7 +56,7 @@ const CASES: Case[] = [
   },
   {
     num: "04",
-    year: "2026",
+    year: "TBD",
     title: "AI operations layer for service businesses",
     desc: "Internal R&D — distilling the patterns from booking, kitchens, and retail into a configurable platform with AI woven through the operations layer.",
     category: "Studio R&D · In research",

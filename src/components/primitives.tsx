@@ -3,15 +3,32 @@ import type { CSSProperties, ReactNode } from "react";
 /* ──────────────────────────────────────────────────────
    Logo
    ────────────────────────────────────────────────────── */
+export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
+  return (
+    <span
+      className={`relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-canvas-deep shadow-[var(--shadow-pop)] ${className}`}
+      aria-hidden
+    >
+      <span className="absolute inset-0 bg-gradient-to-br from-accent/25 via-transparent to-transparent" />
+      <svg viewBox="0 0 32 32" className="relative h-[60%] w-[60%]">
+        <rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e0ff4f" />
+        <rect x="7" y="14.4" width="13" height="3.2" rx="1.6" fill="#e0ff4f" />
+        <rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#e0ff4f" />
+      </svg>
+    </span>
+  );
+}
+
 export function Logo() {
   return (
-    <a href="#hero" className="flex items-center gap-2.5 no-underline">
-      <span className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-ink text-canvas text-[13px] font-medium shadow-[var(--shadow-pop)]">
-        <span className="absolute inset-0 bg-gradient-to-br from-accent to-accent-hover opacity-90" />
-        <span className="relative font-serif text-[15px] tracking-tight">Ex</span>
-      </span>
+    <a
+      href="#hero"
+      className="flex items-center gap-2.5 no-underline"
+      aria-label="ExperTech — home"
+    >
+      <LogoMark />
       <span className="text-[15.5px] font-medium tracking-tight text-ink">
-        Expertech
+        ExperTech
       </span>
     </a>
   );

@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+// import { useState, type FormEvent } from "react"; // re-enable when newsletter form is uncommented
 import { Github, Linkedin, Twitter } from "lucide-react";
 import { GlowOrb, NoiseLayer } from "./primitives";
 
@@ -25,12 +25,12 @@ const SOCIAL = [
 ];
 
 export function Footer() {
-  const [submitted, setSubmitted] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  // const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setSubmitted(true);
+  // };
 
   return (
     <footer className="relative isolate overflow-hidden">
@@ -52,7 +52,7 @@ export function Footer() {
             {/* Brand */}
             <div>
               <div className="font-serif text-[34px] leading-[0.95] tracking-[-0.025em] text-ink md:text-[44px]">
-                Expertech
+                ExperTech
               </div>
               <p className="mt-5 max-w-[320px] text-[14.5px] leading-[1.7] text-ink/65">
                 An independent software studio building web platforms, SaaS
@@ -112,7 +112,7 @@ export function Footer() {
             </div>
 
             {/* Email capture */}
-            <div className="text-center lg:text-left">
+            {/* <div className="text-center lg:text-left">
               <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-ink/45">
                 Get notes from the studio
               </div>
@@ -140,7 +140,7 @@ export function Footer() {
                   {submitted ? "Subscribed" : "Subscribe"}
                 </button>
               </form>
-            </div>
+            </div> */}
           </div>
 
           <div className="relative z-10 mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-[12px] text-ink/55">

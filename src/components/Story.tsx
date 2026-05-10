@@ -33,7 +33,7 @@ export function Story() {
           <GlassCard className="p-8 md:p-10">
             <div className="flex flex-col gap-5 text-[17px] leading-[1.75] text-ink-soft">
               <p>
-                Expertech started with a simple frustration: most software is
+                ExperTech started with a simple frustration: most software is
                 written to ship a demo, not to last a decade. We set out to
                 build the opposite — a small, senior team that treats every
                 codebase like something it will have to maintain for years.

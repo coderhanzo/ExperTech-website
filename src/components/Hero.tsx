@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ChevronUp } from "lucide-react";
 import { ArrowUpRight, Blob, GlowOrb, NoiseLayer, Ring } from "./primitives";
 
@@ -7,7 +8,90 @@ const TRUST_ITEMS = [
   { value: "100%", label: "Custom backends" },
 ];
 
+/* ──────────────────────────────────────────────────────────────────
+   Studio status pill — live Accra time + holiday overrides
+   Edit availability / holidays here; falls back to the static string
+   on first render before hydration.
+   ────────────────────────────────────────────────────────────────── */
+const STUDIO_CONFIG = {
+  city: "Accra",
+  timezone: "Africa/Accra",
+  availability: "Available Q4 2026",
+  // Used on the very first render before the hook mounts (avoids hydration flash).
+  fallbackShort: "Available Q4 2026",
+  fallbackLong: "Independent software studio · Available Q4 2026",
+} as const;
+
+// MM-DD → greeting. Keep statements short; the pill is narrow.
+const HOLIDAYS: Record<string, string> = {
+  "01-01": "Happy New Year",
+  "03-06": "Happy Independence Day · Ghana",
+  "05-01": "May Day",
+  "07-01": "Republic Day · Ghana",
+  "08-04": "Founders' Day",
+  "09-21": "Kwame Nkrumah Memorial Day",
+  "12-25": "Merry Christmas",
+  "12-26": "Boxing Day",
+  "12-31": "Happy New Year's Eve",
+};
+
+interface StudioStatus {
+  short: string;
+  long: string;
+  isHoliday: boolean;
+}
+
+function computeStudioStatus(): StudioStatus {
+  const now = new Date();
+  const tz = STUDIO_CONFIG.timezone;
+
+  const time = new Intl.DateTimeFormat("en-GB", {
+    timeZone: tz,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(now);
+
+  const dateISO = new Intl.DateTimeFormat("en-CA", {
+    timeZone: tz,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now); // "YYYY-MM-DD"
+
+  const [, month, day] = dateISO.split("-");
+  const holiday = HOLIDAYS[`${month}-${day}`];
+
+  if (holiday) {
+    return {
+      short: `${holiday} · ${time} GMT`,
+      long: `${holiday} · ${STUDIO_CONFIG.city} · ${time} GMT`,
+      isHoliday: true,
+    };
+  }
+
+  return {
+    short: `${STUDIO_CONFIG.city} · ${time} · ${STUDIO_CONFIG.availability}`,
+    long: `${STUDIO_CONFIG.city} · ${time} GMT · ${STUDIO_CONFIG.availability}`,
+    isHoliday: false,
+  };
+}
+
+function useStudioStatus(): StudioStatus | null {
+  // null on first render → render fallback. After mount, returns live status.
+  const [status, setStatus] = useState<StudioStatus | null>(null);
+
+  useEffect(() => {
+    setStatus(computeStudioStatus());
+    const id = setInterval(() => setStatus(computeStudioStatus()), 30_000);
+    return () => clearInterval(id);
+  }, []);
+
+  return status;
+}
+
 export function Hero() {
+  const status = useStudioStatus();
   return (
     <section
       id="hero"
@@ -75,8 +159,12 @@ export function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
               <span>
-                <span className="hidden sm:inline">Independent software studio · </span>
-                Available Q3 2026
+                <span className="hidden sm:inline">
+                  {status ? status.long : STUDIO_CONFIG.fallbackLong}
+                </span>
+                <span className="sm:hidden">
+                  {status ? status.short : STUDIO_CONFIG.fallbackShort}
+                </span>
               </span>
             </div>
 
@@ -88,7 +176,7 @@ export function Hero() {
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-pretty text-[15.5px] leading-[1.65] text-ink-soft md:mt-7 md:text-[19px] md:leading-[1.7] md:text-muted">
-              Expertech is a small team of senior engineers and product
+              ExperTech is a small team of senior engineers and product
               thinkers. We design, build, and scale web platforms, SaaS
               products, and AI systems — for companies that treat software as a
               competitive advantage.

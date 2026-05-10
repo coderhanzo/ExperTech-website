@@ -56,9 +56,14 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Prevent horizontal overflow from full-bleed sections that use 100vw
+     (which includes the vertical scrollbar width). `clip` is preferred over
+     `hidden` because it doesn't create a scroll container or break sticky. */
+  overflow-x: clip;
 }
 
 body {
+  overflow-x: clip;
   margin: 0;
   background-color: var(--color-canvas);
   color: var(--color-ink);

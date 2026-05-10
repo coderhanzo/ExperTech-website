@@ -13,6 +13,7 @@ import { FAQ } from "./components/FAQ";
 import { Contact } from "./components/Contact";
 import { FinalCta } from "./components/FinalCta";
 import { Footer } from "./components/Footer";
+// import { LogoConcepts } from "./components/LogoConcepts";
 
 const SECTION_IDS = [
   "hero",
@@ -62,6 +63,7 @@ export default function App() {
       </a>
       <Header activeSection={active} />
       <main id="main">
+        {/* <LogoConcepts /> */}
         <Hero />
         <TrustStrip />
         <StackSection />
