@@ -9,21 +9,27 @@
     <meta name="color-scheme" content="dark" />
 
     <!-- Primary SEO -->
-    <title>ExperTech — Software Development Studio for Modern Businesses</title>
+    <title>ExperTech — Software Development Studio | Web, SaaS & AI Engineering</title>
     <meta
       name="description"
-      content="ExperTech is a software development studio building custom web applications, SaaS platforms, AI-powered tools, and scalable backend systems. Senior engineers, product-minded delivery, measurable outcomes."
+      content="ExperTech is an independent software studio in Accra, Ghana, building custom web platforms, SaaS products, and AI systems for companies worldwide. Senior engineers, product-minded delivery, code you keep."
     />
-    <meta
-      name="keywords"
-      content="software development company, custom software development, web application development, SaaS development, AI software development, product engineering studio, backend development, cloud architecture, DevOps consulting, React development, Next.js agency, TypeScript engineering, Node.js development, mobile app development, API development, system architecture, technical consulting, MVP development, startup engineering partner, enterprise software, digital transformation, UI UX engineering, design systems, scalable software, software studio, product studio, ExperTech"
-    />
-    <meta name="author" content="ExperTech" />
+    <meta name="author" content="ExperTech Solutions" />
+    <meta name="publisher" content="ExperTech Solutions" />
     <meta
       name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     />
-    <link rel="canonical" href="https://expertech.dev/" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://www.expertech.dev/" />
+    <link rel="alternate" hreflang="en" href="https://www.expertech.dev/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.expertech.dev/" />
+
+    <!-- Geo (helps local / regional discovery) -->
+    <meta name="geo.region" content="GH-AA" />
+    <meta name="geo.placename" content="Accra" />
+    <meta name="geo.position" content="5.6037;-0.1870" />
+    <meta name="ICBM" content="5.6037, -0.1870" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -34,12 +40,14 @@
     />
     <meta
       property="og:description"
-      content="Senior engineers building durable software: web apps, SaaS platforms, AI tools, and scalable backends."
+      content="Independent software studio building durable web platforms, SaaS products, and AI systems. Senior engineers, product-minded delivery."
     />
-    <meta property="og:url" content="https://expertech.dev/" />
-    <meta property="og:image" content="https://expertech.dev/og.png" />
+    <meta property="og:url" content="https://www.expertech.dev/" />
+    <!-- NOTE: /og.png referenced below does not exist in public/. Add a 1200x630 PNG to public/og.png before launch — missing OG images hurt social shares and crawler signals. -->
+    <meta property="og:image" content="https://www.expertech.dev/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:alt"
       content="ExperTech — independent software studio"
@@ -48,16 +56,15 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@ExperTech" />
     <meta
       name="twitter:title"
       content="ExperTech — Software Development Studio"
     />
     <meta
       name="twitter:description"
-      content="Senior engineers building durable software: web apps, SaaS platforms, AI tools, and scalable backends."
+      content="Independent software studio building durable web platforms, SaaS products, and AI systems."
     />
-    <meta name="twitter:image" content="https://expertech.dev/og.png" />
+    <meta name="twitter:image" content="https://www.expertech.dev/og.png" />
     <meta
       name="twitter:image:alt"
       content="ExperTech — independent software studio"
@@ -66,47 +73,184 @@
     <!-- Performance hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 
-    <!-- Fonts (display=swap so text paints immediately while font loads) -->
+    <!-- Fonts loaded non-render-blocking (improves LCP, a ranking signal).
+         Browsers without onload (rare) still get the stylesheet via <noscript>. -->
     <link
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      />
+    </noscript>
 
-    <!-- Structured data -->
+    <!-- Structured data: Organization (root entity) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": "https://www.expertech.dev/#organization",
         "name": "ExperTech",
-        "url": "https://expertech.dev/",
-        "logo": "https://expertech.dev/favicon.svg",
-        "description": "Software development studio building custom web applications, SaaS platforms, AI tools, and scalable backend systems.",
-        "sameAs": [
-          "https://www.linkedin.com/company/ExperTech",
-          "https://github.com/ExperTech",
-          "https://x.com/ExperTech"
-        ]
+        "legalName": "ExperTech Solutions",
+        "url": "https://www.expertech.dev/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.expertech.dev/favicon.svg"
+        },
+        "description": "Independent software studio building custom web platforms, SaaS products, and AI systems for companies that take their software seriously.",
+        "foundingLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Accra",
+            "addressCountry": "GH"
+          }
+        },
+        "areaServed": {
+          "@type": "Place",
+          "name": "Worldwide"
+        }
       }
     </script>
+
+    <!-- Structured data: ProfessionalService (helps Google understand offerings) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "@id": "https://www.expertech.dev/#service",
+        "name": "ExperTech",
+        "url": "https://www.expertech.dev/",
+        "image": "https://www.expertech.dev/favicon.svg",
+        "priceRange": "$$$",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Accra",
+          "addressRegion": "Greater Accra",
+          "addressCountry": "GH"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 5.6037,
+          "longitude": -0.1870
+        },
+        "areaServed": "Worldwide",
+        "serviceType": [
+          "Custom web application development",
+          "SaaS product engineering",
+          "AI systems and tooling",
+          "Backend platforms and architecture",
+          "Technical audits and consulting"
+        ],
+        "parentOrganization": { "@id": "https://www.expertech.dev/#organization" }
+      }
+    </script>
+
+    <!-- Structured data: WebSite (enables sitelinks searchbox if site grows) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "@id": "https://www.expertech.dev/#website",
         "name": "ExperTech",
-        "url": "https://expertech.dev/"
+        "url": "https://www.expertech.dev/",
+        "publisher": { "@id": "https://www.expertech.dev/#organization" },
+        "inLanguage": "en"
+      }
+    </script>
+
+    <!-- Structured data: FAQ (eligible for rich results in Google Search) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How long does a typical engagement take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most engagements run 8 to 16 weeks from kickoff to the first production release, depending on scope. We'll give you an honest range after the two-week Discover phase — not before."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you work with early-stage startups, or only scale-ups?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Both. We work with pre-seed founders who need an engineering partner to get to a usable product, and with later-stage companies that need senior capacity for a focused initiative. What we don't do is staff augmentation for features we don't believe in."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you price your work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fixed monthly retainer based on team shape and duration. No per-hour timesheets, no change-order theatre. We'd rather write the right thing slowly than the wrong thing on budget."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens after the project ships?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You own the code and the infrastructure. We offer optional retainers for on-call, hardening, and future phases — but every engagement is designed so your team can operate without us from day one."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you work remotely or on-site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fully remote by default, with async-first collaboration across time zones. We'll travel on-site for kickoffs, critical workshops, or incident response when it genuinely helps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you work within our existing stack?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We have strong preferences, but we're pragmatic — if your team has shipped a Rails monolith for ten years and it works, we're not going to suggest a rewrite for its own sake."
+            }
+          }
+        ]
       }
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Crawler-visible content: indexed by bots that don't execute JS and serves as
+           an instant-paint fallback for users while the React bundle loads. React's
+           createRoot will replace this on hydration. Keep in sync with hero copy. -->
+      <main>
+        <h1>ExperTech — Software Development Studio</h1>
+        <p>
+          ExperTech is an independent software studio building custom web
+          platforms, SaaS products, and AI systems for companies that treat
+          software as a competitive advantage. Based in Accra, Ghana. Remote
+          worldwide.
+        </p>
+        <h2>What we build</h2>
+        <ul>
+          <li>Custom web and SaaS applications</li>
+          <li>Backend platforms and cloud architecture</li>
+          <li>AI systems and product tooling</li>
+          <li>Technical audits and engineering consulting</li>
+        </ul>
+        <p><a href="#contact">Start a project</a> · <a href="#work">See our work</a></p>
+      </main>
+    </div>
+    <noscript>
+      <p style="padding:1rem;text-align:center;font-family:system-ui">
+        This site works best with JavaScript enabled. Reach us at
+        <a href="mailto:hello@expertech.dev">hello@expertech.dev</a>.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

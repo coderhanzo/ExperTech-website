@@ -11,4 +11,4 @@ Disallow: /register/
 Disallow: /account/
 Disallow: /settings/
 
-Sitemap: https://expertech.dev/sitemap.xml
+Sitemap: https://www.expertech.dev/sitemap.xml

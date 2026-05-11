@@ -1,5 +1,5 @@
 // import { useState, type FormEvent } from "react"; // re-enable when newsletter form is uncommented
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { GlowOrb, NoiseLayer } from "./primitives";
 
 const NAV_LINKS = [
@@ -18,10 +18,13 @@ const SVC_LINKS = [
   { label: "Technical audits", href: "#services" },
 ];
 
-const SOCIAL = [
-  { label: "LinkedIn", href: "#", Icon: Linkedin },
-  { label: "GitHub", href: "#", Icon: Github },
-  { label: "X / Twitter", href: "#", Icon: Twitter },
+// Only list socials with real URLs. Empty/"#" hrefs hurt SEO (broken outbound links)
+// and create dead-end UX. Once a profile exists, add it here AND mirror it in
+// the Organization JSON-LD `sameAs` array in index.html.
+const SOCIAL: { label: string; href: string; Icon: typeof Linkedin }[] = [
+  // { label: "LinkedIn", href: "https://www.linkedin.com/company/expertech", Icon: Linkedin },
+  // { label: "GitHub", href: "https://github.com/expertech", Icon: Github },
+  // { label: "X / Twitter", href: "https://x.com/expertech", Icon: Twitter },
 ];
 
 export function Footer() {
