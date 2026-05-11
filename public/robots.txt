@@ -1,4 +1,14 @@
 User-agent: *
+# Production public marketing pages should be crawlable.
 Allow: /
+
+# Keep private and application-only routes out of crawler access.
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /register/
+Disallow: /account/
+Disallow: /settings/
 
 Sitemap: https://expertech.dev/sitemap.xml
