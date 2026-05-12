@@ -94,7 +94,7 @@ export function Header({ activeSection }: HeaderProps) {
             className={`hidden md:flex items-center justify-between gap-3 rounded-full px-2.5 py-2 transition-all duration-300 ${
               scrolled
                 ? "glass-pill"
-                : "border border-white/12 bg-white/8 backdrop-blur-md shadow-[var(--shadow-pill)]"
+                : "border border-white/12 bg-white/8 backdrop-blur-xl shadow-[var(--shadow-pill)]"
             }`}
           >
             <div className="pl-3">
