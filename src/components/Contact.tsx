@@ -74,7 +74,7 @@ export function Contact() {
                 {
                   icon: <Phone className="h-4 w-4" aria-hidden />,
                   label: "Phone",
-                  value: "+233 54 749 6357",
+                  value: "+233 (0) 20 375 8021",
                 },
               ].map((r) => (
                 <div key={r.label} className="flex items-start gap-4">
