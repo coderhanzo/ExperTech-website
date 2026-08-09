@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ChevronUp } from "lucide-react";
-import { ArrowUpRight, Blob, GlowOrb, NoiseLayer, Ring } from "./primitives";
+import { ArrowUpRight, Blob, GlowOrb, LogoMark, NoiseLayer, Ring } from "./primitives";
 
 const TRUST_ITEMS = [
   { value: "12", label: "Yrs combined exp" },
@@ -102,32 +102,32 @@ export function Hero() {
         {/* Layered shape background — softened for mobile, full intensity on desktop */}
         <GlowOrb
           size={520}
-          color="rgba(224, 255, 79, 0.10)"
+          color="rgba(175, 92, 65, 0.10)"
           className="float-blob -top-32 -right-32 md:hidden"
         />
         <GlowOrb
           size={760}
-          color="rgba(224, 255, 79, 0.18)"
+          color="rgba(175, 92, 65, 0.20)"
           className="float-blob hidden md:-top-56 md:-right-24 md:block"
         />
         <GlowOrb
           size={420}
-          color="rgba(224, 255, 79, 0.07)"
+          color="rgba(217, 140, 106, 0.07)"
           className="-bottom-32 -left-32 md:hidden"
         />
         <GlowOrb
           size={620}
-          color="rgba(224, 255, 79, 0.10)"
+          color="rgba(175, 92, 65, 0.10)"
           className="hidden md:-bottom-40 md:-left-24 md:block"
         />
         <GlowOrb
           size={420}
-          color="rgba(120, 190, 195, 0.20)"
+          color="rgba(61, 68, 54, 0.28)"
           className="float-blob hidden md:right-1/4 md:top-1/3 md:block"
         />
         <Blob
           size={480}
-          color="rgba(180, 230, 220, 0.12)"
+          color="rgba(61, 68, 54, 0.18)"
           className="float-blob hidden right-[-10%] top-[14%] sm:block md:right-[-6%] md:top-[18%]"
           rotate={-18}
         />
@@ -147,6 +147,27 @@ export function Hero() {
           size={1240}
           className="left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-30 md:block"
         />
+        <div className="pointer-events-none absolute -right-16 top-1/2 hidden -translate-y-1/2 opacity-[0.11] lg:block">
+          <LogoMark className="h-[580px] w-[580px]" />
+        </div>
+        <svg
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[46%] w-full opacity-35"
+          viewBox="0 0 1200 360"
+          preserveAspectRatio="none"
+        >
+          <g fill="none" stroke="rgba(175,92,65,.34)" strokeWidth="1">
+            <path d="M0 260H154l38-42h124l54-68h172l48 43h146l45-75h159l38-54h192" />
+            <path d="M0 306h228l42-38h173l54-59h122l51 42h183l37-65h310" />
+            <path d="M0 214h116l43-48h147l48-61h181l53 44h111l42-64h176l43-45h240" />
+          </g>
+          <g fill="#D98C6A">
+            <circle cx="154" cy="260" r="3"/><circle cx="316" cy="218" r="3"/>
+            <circle cx="542" cy="150" r="3"/><circle cx="736" cy="193" r="3"/>
+            <circle cx="940" cy="118" r="3"/><circle cx="270" cy="268" r="3"/>
+            <circle cx="619" cy="209" r="3"/><circle cx="890" cy="186" r="3"/>
+          </g>
+        </svg>
         <NoiseLayer />
 
         {/* Centered content */}
@@ -169,17 +190,17 @@ export function Hero() {
             </div>
 
             <h1 className="mt-5 text-balance text-hero text-ink md:mt-7">
-              Software built to{" "}
-              <em className="accent-italic">outlast</em>
+              Building intelligent{" "}
+              <em className="accent-italic">digital systems</em>
               <br className="hidden sm:block" />
-              {" "}the quarter it shipped in.
+              {" "}for what comes next.
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-pretty text-[15.5px] leading-[1.65] text-ink-soft md:mt-7 md:text-[19px] md:leading-[1.7] md:text-muted">
-              ExperTech is a small team of senior engineers and product
-              thinkers. We design, build, and scale web platforms, SaaS
-              products, and AI systems — for companies that treat software as a
-              competitive advantage.
+              NeuraForge Systems brings senior engineers and product thinkers
+              together to design, build, and scale web platforms, SaaS products,
+              and AI automation for companies ready to turn their biggest ideas
+              into durable technology.
             </p>
 
             <div className="mt-7 flex flex-col items-stretch justify-center gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-10">

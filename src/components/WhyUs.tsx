@@ -33,7 +33,7 @@ export function WhyUs() {
     >
       <GlowOrb
         size={500}
-        color="rgba(224, 255, 79, 0.09)"
+        color="rgba(175, 92, 65, 0.09)"
         className="top-1/3 -right-32"
       />
       <NoiseLayer />

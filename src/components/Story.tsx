@@ -15,7 +15,7 @@ export function Story() {
     >
       <GlowOrb
         size={460}
-        color="rgba(224, 255, 79, 0.09)"
+        color="rgba(175, 92, 65, 0.11)"
         className="-top-24 -left-20"
       />
       <NoiseLayer />
@@ -33,9 +33,9 @@ export function Story() {
           <GlassCard className="p-8 md:p-10">
             <div className="flex flex-col gap-5 text-[17px] leading-[1.75] text-ink-soft">
               <p>
-                ExperTech started with a simple frustration: most software is
-                written to ship a demo, not to last a decade. We set out to
-                build the opposite — a small, senior team that treats every
+                NeuraForge started with a simple conviction: the best software
+                should last far beyond the launch. We built a small, senior
+                team that treats every
                 codebase like something it will have to maintain for years.
               </p>
               <p>

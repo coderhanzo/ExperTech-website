@@ -5,16 +5,13 @@ import type { CSSProperties, ReactNode } from "react";
    ────────────────────────────────────────────────────── */
 export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
   return (
-    <span
-      className={`relative inline-flex items-center justify-center overflow-hidden rounded-xl bg-canvas-deep shadow-[var(--shadow-pop)] ${className}`}
-      aria-hidden
-    >
-      <span className="absolute inset-0 bg-gradient-to-br from-accent/25 via-transparent to-transparent" />
-      <svg viewBox="0 0 32 32" className="relative h-[60%] w-[60%]">
-        <rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e0ff4f" />
-        <rect x="7" y="14.4" width="13" height="3.2" rx="1.6" fill="#e0ff4f" />
-        <rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#e0ff4f" />
-      </svg>
+    <span className={`relative inline-flex items-center justify-center ${className}`} aria-hidden>
+      <img
+        src="/favicon.svg"
+        alt=""
+        className="h-full w-full object-contain"
+        draggable={false}
+      />
     </span>
   );
 }
@@ -24,11 +21,16 @@ export function Logo() {
     <a
       href="#hero"
       className="flex items-center gap-2.5 no-underline"
-      aria-label="ExperTech — home"
+      aria-label="NeuraForge Systems — home"
     >
-      <LogoMark />
-      <span className="text-[15.5px] font-medium tracking-tight text-ink">
-        ExperTech
+      <LogoMark className="h-10 w-10" />
+      <span className="flex flex-col leading-none text-ink">
+        <span className="font-serif text-[14px] font-semibold uppercase tracking-[0.16em]">
+          Neura<span className="text-accent-soft">Forge</span>
+        </span>
+        <span className="mt-1 text-[7px] font-semibold uppercase tracking-[0.48em] text-muted">
+          Systems
+        </span>
       </span>
     </a>
   );
@@ -311,7 +313,7 @@ interface GlowOrbProps {
 
 export function GlowOrb({
   size = 520,
-  color = "rgba(224, 255, 79, 0.14)",
+  color = "rgba(175, 92, 65, 0.14)",
   opacity = 1,
   className = "",
   style,
@@ -341,7 +343,7 @@ interface BlobProps {
 
 export function Blob({
   className = "",
-  color = "rgba(224, 255, 79, 0.10)",
+  color = "rgba(175, 92, 65, 0.10)",
   size = 380,
   rotate = 0,
   style,
@@ -388,7 +390,7 @@ function SectionShapes() {
     <>
       <GlowOrb
         size={420}
-        color="rgba(224, 255, 79, 0.10)"
+        color="rgba(175, 92, 65, 0.10)"
         className="-top-32 -right-20"
       />
       <GlowOrb

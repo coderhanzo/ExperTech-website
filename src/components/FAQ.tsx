@@ -46,7 +46,7 @@ export function FAQ() {
     >
       <GlowOrb
         size={460}
-        color="rgba(224, 255, 79, 0.08)"
+        color="rgba(175, 92, 65, 0.08)"
         className="-bottom-24 left-1/4"
       />
       <NoiseLayer />

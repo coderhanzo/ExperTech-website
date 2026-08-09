@@ -1,6 +1,6 @@
 // import { useState, type FormEvent } from "react"; // re-enable when newsletter form is uncommented
 import { Linkedin } from "lucide-react";
-import { GlowOrb, NoiseLayer } from "./primitives";
+import { GlowOrb, LogoMark, NoiseLayer } from "./primitives";
 
 const NAV_LINKS = [
   { label: "Home", href: "#hero" },
@@ -41,12 +41,12 @@ export function Footer() {
         <div className="relative isolate overflow-hidden rounded-[var(--radius-section)] glass-dark px-7 py-14 md:px-14 md:py-20">
           <GlowOrb
             size={780}
-            color="rgba(224, 255, 79, 0.18)"
+            color="rgba(175, 92, 65, 0.18)"
             className="-bottom-48 -left-40"
           />
           <GlowOrb
             size={520}
-            color="rgba(224, 255, 79, 0.10)"
+            color="rgba(217, 140, 106, 0.10)"
             className="-top-32 right-1/4"
           />
           <NoiseLayer />
@@ -54,8 +54,16 @@ export function Footer() {
           <div className="relative z-10 grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
             {/* Brand */}
             <div>
-              <div className="font-serif text-[34px] leading-[0.95] tracking-[-0.025em] text-ink md:text-[44px]">
-                ExperTech
+              <div className="flex items-center gap-4 text-ink">
+                <LogoMark className="h-16 w-16 shrink-0" />
+                <div className="flex flex-col leading-none">
+                  <span className="font-serif text-[22px] font-semibold uppercase tracking-[0.14em] md:text-[26px]">
+                    Neura<span className="text-accent-soft">Forge</span>
+                  </span>
+                  <span className="mt-2 text-[9px] font-semibold uppercase tracking-[0.52em] text-muted">
+                    Systems
+                  </span>
+                </div>
               </div>
               <p className="mt-5 max-w-[320px] text-[14.5px] leading-[1.7] text-ink/65">
                 An independent software studio building web platforms, SaaS
@@ -148,7 +156,7 @@ export function Footer() {
 
           <div className="relative z-10 mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-[12px] text-ink/55">
             <span>
-              © {new Date().getFullYear()} ExperTech Solutions. All rights
+              © {new Date().getFullYear()} NeuraForge Systems. All rights
               reserved.
             </span>
             <span>Accra · Ghana · Remote worldwide</span>

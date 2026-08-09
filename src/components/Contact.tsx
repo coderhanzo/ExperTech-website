@@ -41,7 +41,7 @@ export function Contact() {
     >
       <GlowOrb
         size={520}
-        color="rgba(224, 255, 79, 0.10)"
+        color="rgba(175, 92, 65, 0.10)"
         className="-top-24 -right-32"
       />
       <GlowOrb
@@ -69,7 +69,7 @@ export function Contact() {
                 {
                   icon: <Mail className="h-4 w-4" aria-hidden />,
                   label: "Email",
-                  value: "exper.b.tech@gmail.com",
+                  value: "neuraforgesys@gmail.com",
                 },
                 {
                   icon: <Phone className="h-4 w-4" aria-hidden />,

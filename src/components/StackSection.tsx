@@ -70,7 +70,7 @@ export function StackSection() {
           <div className="relative flex min-h-[360px] flex-col justify-between overflow-hidden rounded-[var(--radius-card-lg)] glass-dark p-7 md:p-9">
             <GlowOrb
               size={420}
-              color="rgba(224, 255, 79, 0.13)"
+              color="rgba(175, 92, 65, 0.13)"
               className="-bottom-32 -left-20"
             />
             <NoiseLayer />

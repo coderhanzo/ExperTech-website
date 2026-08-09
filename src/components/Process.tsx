@@ -42,7 +42,7 @@ export function Process() {
     >
       <GlowOrb
         size={500}
-        color="rgba(224, 255, 79, 0.08)"
+        color="rgba(175, 92, 65, 0.08)"
         className="-bottom-20 right-1/4"
       />
       <NoiseLayer />

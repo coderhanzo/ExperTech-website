@@ -12,7 +12,7 @@ const QUOTES = [
     name: "[Client Name]",
     role: "Owner",
     company: "[Salon · Beauty]",
-    wash: "rgba(224, 255, 79, 0.14)",
+    wash: "rgba(175, 92, 65, 0.14)",
     tag: "Beauty",
   },
   {
@@ -44,7 +44,7 @@ export function Testimonials() {
     >
       <GlowOrb
         size={500}
-        color="rgba(224, 255, 79, 0.08)"
+        color="rgba(175, 92, 65, 0.08)"
         className="-top-24 left-1/3"
       />
       <NoiseLayer />

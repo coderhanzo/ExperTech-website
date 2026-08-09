@@ -60,7 +60,7 @@ function ServiceCard({
       {dark && (
         <GlowOrb
           size={360}
-          color="rgba(224, 255, 79, 0.13)"
+          color="rgba(175, 92, 65, 0.13)"
           className="-bottom-32 -right-24"
         />
       )}
@@ -158,7 +158,7 @@ export function Services() {
     >
       <GlowOrb
         size={520}
-        color="rgba(224, 255, 79, 0.09)"
+        color="rgba(175, 92, 65, 0.09)"
         className="-top-32 -right-20"
       />
       <NoiseLayer />

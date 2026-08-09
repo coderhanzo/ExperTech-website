@@ -11,12 +11,12 @@ export function FinalCta() {
         <div className="relative isolate overflow-hidden rounded-[var(--radius-section)] glass-dark px-7 py-20 md:px-16 md:py-28">
           <GlowOrb
             size={780}
-            color="rgba(224, 255, 79, 0.18)"
+            color="rgba(175, 92, 65, 0.18)"
             className="-bottom-48 -right-32"
           />
           <GlowOrb
             size={520}
-            color="rgba(224, 255, 79, 0.10)"
+            color="rgba(217, 140, 106, 0.10)"
             className="-top-24 left-1/4"
           />
           <NoiseLayer />
@@ -50,10 +50,10 @@ export function FinalCta() {
                 </span>
               </a>
               <a
-                href="mailto:exper.b.tech@gmail.com"
+                href="mailto:neuraforgesys@gmail.com"
                 className="text-sm text-ink/70 underline underline-offset-4 transition-colors duration-200 hover:text-ink"
               >
-                or email exper.b.tech@gmail.com
+                or email neuraforgesys@gmail.com
               </a>
             </div>
           </div>

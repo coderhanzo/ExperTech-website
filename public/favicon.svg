@@ -1,7 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Expertech">
-  <rect width="32" height="32" rx="7" fill="#00272b"/>
-  <circle cx="6" cy="6" r="9" fill="#e0ff4f" opacity="0.14"/>
-  <rect x="7" y="8" width="18" height="3.2" rx="1.6" fill="#e0ff4f"/>
-  <rect x="7" y="14.4" width="13" height="3.2" rx="1.6" fill="#e0ff4f"/>
-  <rect x="7" y="20.8" width="18" height="3.2" rx="1.6" fill="#e0ff4f"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 620" role="img" aria-labelledby="title desc">
+  <title id="title">ExperTech geometric N mark</title>
+  <desc id="desc">A copper and bronze three-dimensional geometric N-shaped logo on a transparent background.</desc>
+  <defs>
+    <linearGradient id="leftFace" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffb05b"/>
+      <stop offset="0.34" stop-color="#cf6c19"/>
+      <stop offset="1" stop-color="#8e3505"/>
+    </linearGradient>
+    <linearGradient id="rightFace" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#f29a43"/>
+      <stop offset="0.42" stop-color="#bf5b13"/>
+      <stop offset="1" stop-color="#7a2603"/>
+    </linearGradient>
+    <linearGradient id="lowerFace" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e47d27"/>
+      <stop offset="0.55" stop-color="#ad470d"/>
+      <stop offset="1" stop-color="#7b2603"/>
+    </linearGradient>
+    <linearGradient id="bevel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d1d00"/>
+      <stop offset="1" stop-color="#3d0d00"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffd08a" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#fff1cd" stop-opacity=".18"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#4a1200" flood-opacity=".22"/>
+    </filter>
+  </defs>
+
+  <g transform="translate(7 1)">
+    <!-- Left upper/vertical face -->
+    <path d="M47 40 L326 216 L326 307 L128 176 L128 525 L47 456 Z"
+          fill="url(#leftFace)" stroke="#7c2b05" stroke-width="1.5" stroke-linejoin="miter"/>
+
+    <!-- Inner diagonal underside bevel -->
+    <path d="M128 176 L326 307 L326 321 L137 194 L137 523 L128 525 Z"
+          fill="url(#bevel)"/>
+
+    <!-- Left bottom bevel -->
+    <path d="M47 456 L128 525 L137 523 L55 448 Z"
+          fill="#5d1800" opacity=".95"/>
+
+    <!-- Right upright / lower diagonal face -->
+    <path d="M480 75 L390 136 L390 422 L194 290 L194 405 L408 549 L480 501 Z"
+          fill="url(#rightFace)" stroke="#712204" stroke-width="1.5" stroke-linejoin="miter"/>
+
+    <!-- Lower diagonal front modulation -->
+    <path d="M194 290 L390 422 L390 436 L203 309 L203 397 L408 535 L480 487 L480 501 L408 549 L194 405 Z"
+          fill="url(#lowerFace)" opacity=".56"/>
+
+    <!-- Lower diagonal underside bevel -->
+    <path d="M194 405 L408 549 L480 501 L480 515 L408 562 L194 419 Z"
+          fill="url(#bevel)"/>
+
+    <!-- Right inner vertical bevel -->
+    <path d="M390 136 L399 143 L399 423 L390 436 Z"
+          fill="#5b1800" opacity=".88"/>
+
+    <!-- Thin upper highlight edges -->
+    <path d="M48 42 L326 217" fill="none" stroke="url(#highlight)" stroke-width="2.2" stroke-linecap="square"/>
+    <path d="M481 77 L392 138 L392 422" fill="none" stroke="url(#highlight)" stroke-width="2.2" stroke-linecap="square"/>
+    <path d="M196 292 L390 423" fill="none" stroke="url(#highlight)" stroke-width="2"/>
+  </g>
 </svg>
