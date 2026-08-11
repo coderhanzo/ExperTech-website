@@ -9,17 +9,17 @@
 
   --color-ink: #f7f5f0;             /* Off white */
   --color-ink-soft: #e6dcc9;        /* Sand */
-  --color-muted: #a7aaa6;           /* Light gray */
-  --color-muted-soft: #747a7d;      /* Stone */
+  --color-muted: #b2b5b1;           /* Secondary copy — AA on onyx */
+  --color-muted-soft: #929894;      /* Quiet labels — AA on onyx */
 
   --color-line: #e6dcc9;
   --color-line-soft: #3d4436;       /* Deep olive */
 
-  --color-accent: #af5c41;          /* Terracotta copper */
+  --color-accent: #c9785a;          /* Accessible terracotta copper */
   --color-accent-soft: #d98c6a;     /* Clay */
-  --color-accent-deep: #7d3626;
-  --color-accent-glow: #af5c41;
-  --color-accent-hover: #c66d50;
+  --color-accent-deep: #91432e;
+  --color-accent-glow: #c9785a;
+  --color-accent-hover: #dc8c6d;
 
   --color-cool-glow: #3d4436;       /* Deep olive */
 
@@ -218,30 +218,30 @@ select:focus-visible {
 
 /* ─── Glass system (dark canvas) ───────────────────── */
 .glass {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.07);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.13);
   box-shadow:
     var(--shadow-soft),
     var(--shadow-glass-inner);
 }
 
 .glass-card {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(255, 255, 255, 0.075);
   -webkit-backdrop-filter: blur(22px) saturate(150%);
   backdrop-filter: blur(22px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.13);
   box-shadow:
     var(--shadow-soft),
     var(--shadow-glass-inner);
 }
 
 .glass-card-soft {
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: rgba(255, 255, 255, 0.055);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
   backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.11);
   box-shadow:
     0 1px 0 rgba(0, 0, 0, 0.35),
     0 12px 28px -22px rgba(0, 0, 0, 0.55),
@@ -249,29 +249,29 @@ select:focus-visible {
 }
 
 .glass-pill {
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(255, 255, 255, 0.10);
   -webkit-backdrop-filter: blur(28px) saturate(150%);
   backdrop-filter: blur(28px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: var(--shadow-pill);
 }
 
 .glass-dark {
   /* Deeper than the canvas — used for hero feature panels */
-  background-color: rgba(0, 12, 14, 0.78);
+  background-color: rgba(5, 10, 11, 0.9);
   -webkit-backdrop-filter: blur(22px) saturate(140%);
   backdrop-filter: blur(22px) saturate(140%);
-  border: 1px solid rgba(175, 92, 65, 0.14);
+  border: 1px solid rgba(201, 120, 90, 0.24);
   box-shadow:
     0 24px 60px -28px rgba(0, 0, 0, 0.7),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-input {
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: rgba(255, 255, 255, 0.08);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   backdrop-filter: blur(14px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .glass-hover {

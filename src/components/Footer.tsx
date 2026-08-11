@@ -65,7 +65,7 @@ export function Footer() {
                   </span>
                 </div>
               </div>
-              <p className="mt-5 max-w-[320px] text-[14.5px] leading-[1.7] text-ink/65">
+              <p className="mt-5 max-w-[320px] text-[14.5px] leading-[1.7] text-ink-soft">
                 An independent software studio building web platforms, SaaS
                 products, and AI systems for companies that take their
                 software seriously.
@@ -86,7 +86,7 @@ export function Footer() {
 
             {/* Navigation */}
             <div>
-              <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-ink/45">
+              <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-muted">
                 Navigation
               </div>
               <ul className="mt-5 flex list-none flex-col gap-3 p-0">
@@ -105,7 +105,7 @@ export function Footer() {
 
             {/* Services */}
             <div>
-              <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-ink/45">
+              <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-muted">
                 What we build
               </div>
               <ul className="mt-5 flex list-none flex-col gap-3 p-0">
@@ -154,7 +154,7 @@ export function Footer() {
             </div> */}
           </div>
 
-          <div className="relative z-10 mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-[12px] text-ink/55">
+          <div className="relative z-10 mt-14 flex flex-wrap items-center justify-between gap-3 border-t border-white/15 pt-6 text-[12px] text-muted">
             <span>
               © {new Date().getFullYear()} NeuraForge Systems. All rights
               reserved.

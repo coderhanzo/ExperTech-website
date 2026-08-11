@@ -423,7 +423,7 @@ export function GlassCard({
 }: GlassCardProps) {
   const toneClass =
     tone === "dark"
-      ? "glass-dark text-canvas"
+      ? "glass-dark text-ink"
       : tone === "soft"
         ? "glass-card-soft"
         : "glass-card";

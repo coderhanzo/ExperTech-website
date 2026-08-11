@@ -81,10 +81,10 @@ export function StackSection() {
               <p className="mt-7 text-[11px] font-medium uppercase tracking-[0.2em] text-accent-soft">
                 Core stack
               </p>
-              <h2 className="text-h2 mt-4 text-white">
+              <h2 className="text-h2 mt-4 text-ink">
                 A practical toolchain for durable software.
               </h2>
-              <p className="mt-5 text-[15.5px] leading-[1.75] text-white/70">
+              <p className="mt-5 text-[15.5px] leading-[1.75] text-ink-soft">
                 We keep the stack familiar on purpose: proven tools, typed
                 boundaries, clean handoffs, and enough operational depth to run
                 what we ship.
@@ -95,7 +95,7 @@ export function StackSection() {
               {PRINCIPLES.map((principle) => (
                 <span
                   key={principle}
-                  className="rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[12.5px] font-medium text-white/85 backdrop-blur"
+                  className="rounded-full border border-white/15 bg-white/10 px-3.5 py-2 text-[12.5px] font-medium text-ink-soft backdrop-blur"
                 >
                   {principle}
                 </span>

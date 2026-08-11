@@ -32,7 +32,7 @@ export function FinalCta() {
               in five years.
             </h2>
 
-            <p className="mt-6 max-w-xl text-[17px] leading-[1.7] text-ink/65">
+            <p className="mt-6 max-w-xl text-[17px] leading-[1.7] text-ink-soft">
               Brief us in a paragraph or a 60-minute call. We'll come back with
               a written take on scope, risk, and a realistic timeline — free,
               no decks.
@@ -51,7 +51,7 @@ export function FinalCta() {
               </a>
               <a
                 href="mailto:neuraforgesys@gmail.com"
-                className="text-sm text-ink/70 underline underline-offset-4 transition-colors duration-200 hover:text-ink"
+                className="text-sm text-ink-soft underline decoration-ink/40 underline-offset-4 transition-colors duration-200 hover:text-ink"
               >
                 or email neuraforgesys@gmail.com
               </a>

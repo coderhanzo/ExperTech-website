@@ -70,26 +70,18 @@ function ServiceCard({
         <span
           className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${
             dark
-              ? "bg-white/10 text-white backdrop-blur"
+              ? "bg-white/10 text-ink backdrop-blur"
               : "bg-white/12 text-ink ring-1 ring-white/15 backdrop-blur"
           }`}
         >
           {icon}
         </span>
-        <span
-          className={`text-[11px] font-medium uppercase tracking-[0.18em] ${
-            dark ? "text-white/55" : "text-muted"
-          }`}
-        >
+        <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
           {index}
         </span>
       </div>
 
-      <h3
-        className={`relative z-10 text-h3 mt-9 font-normal ${
-          dark ? "text-white" : "text-ink"
-        }`}
-      >
+      <h3 className="relative z-10 text-h3 mt-9 font-normal text-ink">
         {title}
       </h3>
 
@@ -101,11 +93,7 @@ function ServiceCard({
         {tagline}
       </p>
 
-      <p
-        className={`relative z-10 mt-5 text-[15px] leading-[1.7] ${
-          dark ? "text-white/72" : "text-ink-soft"
-        }`}
-      >
+      <p className="relative z-10 mt-5 text-[15px] leading-[1.7] text-ink-soft">
         {description}
       </p>
 
@@ -113,9 +101,7 @@ function ServiceCard({
         {capabilities.map((c) => (
           <li
             key={c}
-            className={`flex items-start gap-3 text-[14.5px] leading-[1.55] ${
-              dark ? "text-white/82" : "text-ink-soft"
-            }`}
+            className="flex items-start gap-3 text-[14.5px] leading-[1.55] text-ink-soft"
           >
             <span
               aria-hidden
