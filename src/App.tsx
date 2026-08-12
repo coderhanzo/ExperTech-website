@@ -5,10 +5,11 @@ import { TrustStrip } from "./components/TrustStrip";
 import { StackSection } from "./components/StackSection";
 import { Story } from "./components/Story";
 import { Services } from "./components/Services";
+import { Solutions } from "./components/Solutions";
 import { Work } from "./components/Work";
+import { Products } from "./components/Products";
 import { Process } from "./components/Process";
 import { WhyUs } from "./components/WhyUs";
-import { Testimonials } from "./components/Testimonials";
 import { FAQ } from "./components/FAQ";
 import { Contact } from "./components/Contact";
 import { FinalCta } from "./components/FinalCta";
@@ -17,12 +18,13 @@ import { Footer } from "./components/Footer";
 
 const SECTION_IDS = [
   "hero",
-  "story",
-  "services",
   "work",
+  "services",
+  "solutions",
+  "products",
   "process",
+  "about",
   "why-us",
-  "testimonials",
   "faq",
   "contact",
   "final-cta",
@@ -66,13 +68,14 @@ export default function App() {
         {/* <LogoConcepts /> */}
         <Hero />
         <TrustStrip />
-        <StackSection />
-        <Story />
-        <Services />
         <Work />
+        <Services />
+        <Solutions />
+        <Products />
         <Process />
+        <Story />
         <WhyUs />
-        <Testimonials />
+        <StackSection />
         <FAQ />
         <Contact />
         <FinalCta />

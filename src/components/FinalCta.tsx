@@ -27,15 +27,13 @@ export function FinalCta() {
             </span>
 
             <h2 className="text-final-cta mt-5 text-ink">
-              Let's build something your team will still be{" "}
-              <em className="font-light italic text-accent-soft">proud of</em>{" "}
-              in five years.
+              Need software that fits how your business{" "}
+              <em className="font-light italic text-accent-soft">actually works</em>?
             </h2>
 
             <p className="mt-6 max-w-xl text-[17px] leading-[1.7] text-ink-soft">
-              Brief us in a paragraph or a 60-minute call. We'll come back with
-              a written take on scope, risk, and a realistic timeline — free,
-              no decks.
+              Tell us what needs to change. We’ll come back with useful questions,
+              an honest view of the risks and a practical next step.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -44,7 +42,7 @@ export function FinalCta() {
                 className="group inline-flex h-13 cursor-pointer items-center gap-2 rounded-full bg-accent px-7 text-[15px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pop)] transition-colors duration-200 hover:bg-accent-hover active:scale-[0.98]"
                 style={{ height: 52 }}
               >
-                Start a project
+                Discuss a project
                 <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/20 backdrop-blur transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </span>

@@ -58,7 +58,7 @@ const PRINCIPLES = ["Typed contracts", "Operational visibility", "Portable archi
 
 export function StackSection() {
   return (
-    <section className="relative isolate overflow-hidden section-pad-md" aria-label="Our stack">
+    <section className="relative isolate overflow-hidden section-pad-md" aria-label="Engineering capability">
       <GlowOrb
         size={520}
         color="rgba(120, 190, 195, 0.22)"
@@ -79,15 +79,15 @@ export function StackSection() {
                 <Bot className="h-5 w-5" aria-hidden />
               </div>
               <p className="mt-7 text-[11px] font-medium uppercase tracking-[0.2em] text-accent-soft">
-                Core stack
+                Engineering proof
               </p>
               <h2 className="text-h2 mt-4 text-ink">
-                A practical toolchain for durable software.
+                Technology supports the system. It is not the proposition.
               </h2>
               <p className="mt-5 text-[15.5px] leading-[1.75] text-ink-soft">
-                We keep the stack familiar on purpose: proven tools, typed
-                boundaries, clean handoffs, and enough operational depth to run
-                what we ship.
+                We choose proven tools, typed boundaries and observable
+                infrastructure around the product and operating context—not the
+                other way around.
               </p>
             </div>
 

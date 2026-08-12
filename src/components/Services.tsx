@@ -1,190 +1,61 @@
-import { Boxes, Cpu } from "lucide-react";
+import { ArrowRight, Boxes, Cog, RefreshCw } from "lucide-react";
 import type { ReactNode } from "react";
-import {
-  AccentItalic,
-  ArrowRight,
-  GlowOrb,
-  NoiseLayer,
-  SectionHeading,
-} from "./primitives";
+import { AccentItalic, GlassCard, GlowOrb, NoiseLayer, SectionHeading } from "./primitives";
 
-const CLIENT_CAPS = [
-  "Custom web applications & SaaS platforms",
-  "API design, backend systems & data pipelines",
-  "Cloud architecture on AWS, GCP, and Azure",
-  "AI integration, RAG systems & internal tooling",
-  "Mobile apps with React Native & native bridges",
-  "Performance, observability & technical audits",
+const CAPABILITIES: Array<{ verb: string; title: string; description: string; items: string[]; icon: ReactNode }> = [
+  {
+    verb: "Build",
+    title: "Digital products",
+    description: "Web applications, mobile apps, SaaS platforms and customer-facing software shaped around a clear commercial job.",
+    items: ["Custom software development", "Web application development", "Mobile application development"],
+    icon: <Boxes className="h-5 w-5" aria-hidden />,
+  },
+  {
+    verb: "Automate",
+    title: "Business operations",
+    description: "Booking, CRM, ecommerce, inventory and workflow systems that reduce manual work and connect the people doing it.",
+    items: ["Business systems", "Workflow automation", "Payments & integrations"],
+    icon: <Cog className="h-5 w-5" aria-hidden />,
+  },
+  {
+    verb: "Modernise",
+    title: "Existing systems",
+    description: "Architecture, performance, reliability and selective AI capability for software supporting its next stage of growth.",
+    items: ["Platform upgrades", "Technical audits", "Intelligent automation"],
+    icon: <RefreshCw className="h-5 w-5" aria-hidden />,
+  },
 ];
-
-const STUDIO_CAPS = [
-  "Design systems & component libraries",
-  "Developer platforms & internal SDKs",
-  "Workflow automation & AI agents",
-  "Open-source tooling & technical R&D",
-  "Reusable ingestion and eval infrastructure",
-  "Playbooks for teams scaling past 20 engineers",
-];
-
-interface ServiceCardProps {
-  index: string;
-  title: string;
-  tagline: string;
-  description: string;
-  capabilities: string[];
-  href: string;
-  ctaLabel: string;
-  icon: ReactNode;
-  dark?: boolean;
-}
-
-function ServiceCard({
-  index,
-  title,
-  tagline,
-  description,
-  capabilities,
-  href,
-  ctaLabel,
-  icon,
-  dark = false,
-}: ServiceCardProps) {
-  return (
-    <article
-      className={`group relative flex h-full flex-col overflow-hidden rounded-[var(--radius-card-lg)] px-7 pt-8 pb-7 transition-all duration-300 md:px-9 md:pt-10 md:pb-9 ${
-        dark
-          ? "glass-dark text-ink hover:shadow-[0_30px_60px_-28px_rgba(0,0,0,0.55)]"
-          : "glass-card hover:-translate-y-1"
-      }`}
-    >
-      {dark && (
-        <GlowOrb
-          size={360}
-          color="rgba(175, 92, 65, 0.13)"
-          className="-bottom-32 -right-24"
-        />
-      )}
-      {dark && <NoiseLayer />}
-
-      <div className="relative z-10 flex items-center gap-3">
-        <span
-          className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${
-            dark
-              ? "bg-white/10 text-ink backdrop-blur"
-              : "bg-white/12 text-ink ring-1 ring-white/15 backdrop-blur"
-          }`}
-        >
-          {icon}
-        </span>
-        <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
-          {index}
-        </span>
-      </div>
-
-      <h3 className="relative z-10 text-h3 mt-9 font-normal text-ink">
-        {title}
-      </h3>
-
-      <p
-        className={`relative z-10 mt-4 text-[17px] italic leading-[1.45] ${
-          dark ? "text-accent-soft" : "text-accent"
-        }`}
-      >
-        {tagline}
-      </p>
-
-      <p className="relative z-10 mt-5 text-[15px] leading-[1.7] text-ink-soft">
-        {description}
-      </p>
-
-      <ul className="relative z-10 mt-8 mb-10 flex list-none flex-col gap-3 p-0">
-        {capabilities.map((c) => (
-          <li
-            key={c}
-            className="flex items-start gap-3 text-[14.5px] leading-[1.55] text-ink-soft"
-          >
-            <span
-              aria-hidden
-              className={`mt-2 h-1 w-1 shrink-0 rounded-full ${
-                dark ? "bg-accent-soft" : "bg-accent"
-              }`}
-            />
-            <span>{c}</span>
-          </li>
-        ))}
-      </ul>
-
-      <div
-        className={`relative z-10 mt-auto border-t pt-6 ${
-          dark ? "border-white/10" : "border-white/12"
-        }`}
-      >
-        <a
-          href={href}
-          className={`group/cta inline-flex cursor-pointer items-center gap-2 text-[14px] font-medium no-underline transition-colors duration-200 ${
-            dark
-              ? "text-ink hover:text-accent-soft"
-              : "text-ink hover:text-accent"
-          }`}
-        >
-          {ctaLabel}
-          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover/cta:translate-x-1" />
-        </a>
-      </div>
-    </article>
-  );
-}
 
 export function Services() {
   return (
-    <section
-      id="services"
-      className="relative isolate overflow-hidden section-pad-md"
-      style={{ scrollMarginTop: 96 }}
-    >
-      <GlowOrb
-        size={520}
-        color="rgba(175, 92, 65, 0.09)"
-        className="-top-32 -right-20"
-      />
+    <section id="services" className="relative isolate overflow-hidden section-pad-md" style={{ scrollMarginTop: 96 }}>
+      <GlowOrb size={520} color="rgba(175, 92, 65, 0.09)" className="-top-32 -right-20" />
       <NoiseLayer />
-
       <div className="container-page relative z-10">
         <SectionHeading
-          eyebrow="Services"
-          title={
-            <>
-              Two practices,
-              <br />
-              one standard of <AccentItalic>craft</AccentItalic>.
-            </>
-          }
-          description="We split our work into client engagements and in-house product R&D. Both pull from the same engineering bench — which keeps the thinking sharp on either side."
+          eyebrow="Engineering services"
+          title={<>Capability with a <AccentItalic>business purpose</AccentItalic>.</>}
+          description="Services answer what we can build. We shape the engagement around the outcome—not around a preferred technology or pre-packaged delivery model."
         />
-
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
-          <ServiceCard
-            index="01"
-            title="Client engagements"
-            tagline="You have a roadmap. We ship it."
-            description="End-to-end product engineering for companies that need a trusted outside team. We embed quickly, move with your cadence, and leave behind documentation, tests, and systems your team can own."
-            capabilities={CLIENT_CAPS}
-            href="#contact"
-            ctaLabel="Brief us on your project"
-            icon={<Boxes className="h-5 w-5" aria-hidden />}
-          />
-          <ServiceCard
-            index="02"
-            title="Studio & platforms"
-            tagline="We build what we wish existed."
-            description="Our internal practice funds focused R&D: developer platforms, AI tooling, and infrastructure patterns we spin out as products or offer to clients as battle-tested starting points."
-            capabilities={STUDIO_CAPS}
-            href="#contact"
-            ctaLabel="Talk about studio work"
-            icon={<Cpu className="h-5 w-5" aria-hidden />}
-            dark
-          />
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {CAPABILITIES.map((capability, index) => (
+            <GlassCard key={capability.verb} as="article" interactive className="flex min-h-[410px] flex-col p-7 md:p-8">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/12 text-ink ring-1 ring-white/15 backdrop-blur">{capability.icon}</span>
+                <span className="text-[11px] uppercase tracking-[0.18em] text-muted">0{index + 1}</span>
+              </div>
+              <div className="mt-8 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">{capability.verb}</div>
+              <h3 className="text-h3 mt-3 text-ink">{capability.title}</h3>
+              <p className="mt-4 text-[15px] leading-[1.7] text-muted">{capability.description}</p>
+              <ul className="mt-auto list-none space-y-3 border-t border-white/12 p-0 pt-6 md:mt-9">
+                {capability.items.map((item) => <li key={item} className="flex items-start gap-3 text-[14px] text-ink-soft"><span aria-hidden className="mt-2 h-1 w-1 rounded-full bg-accent" />{item}</li>)}
+              </ul>
+            </GlassCard>
+          ))}
         </div>
+        <a href="#contact" className="group mt-7 inline-flex items-center gap-2 text-[14px] font-medium text-ink no-underline transition-colors hover:text-accent">
+          Discuss what you need to build <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+        </a>
       </div>
     </section>
   );

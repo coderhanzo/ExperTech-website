@@ -3,14 +3,14 @@ import { Menu, X } from "lucide-react";
 import { Logo } from "./primitives";
 
 const NAV_PRIMARY = [
-  { id: "story", label: "Story" },
   { id: "services", label: "Services" },
+  { id: "solutions", label: "Solutions" },
   { id: "work", label: "Work" },
-  { id: "process", label: "Process" },
+  { id: "products", label: "Products" },
 ] as const;
 
 const NAV_SECONDARY = [
-  { id: "faq", label: "FAQ" },
+  { id: "about", label: "About" },
 ] as const;
 
 const NAV_DRAWER_GROUPS: Array<{ label: string; items: ReadonlyArray<{ id: string; label: string }> }> = [
@@ -18,17 +18,18 @@ const NAV_DRAWER_GROUPS: Array<{ label: string; items: ReadonlyArray<{ id: strin
     label: "Explore",
     items: [
       { id: "hero", label: "Home" },
-      { id: "story", label: "Story" },
       { id: "services", label: "Services" },
+      { id: "solutions", label: "Solutions" },
       { id: "work", label: "Work" },
+      { id: "products", label: "Products" },
       { id: "process", label: "Process" },
     ],
   },
   {
     label: "Studio",
     items: [
-      { id: "why-us", label: "Why us" },
-      { id: "testimonials", label: "Reviews" },
+      { id: "about", label: "About" },
+      { id: "why-us", label: "Why NeuraForge" },
     ],
   },
   {
@@ -129,7 +130,7 @@ export function Header({ activeSection }: HeaderProps) {
                 href="#contact"
                 className="group inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full bg-ink px-5 text-[13.5px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pill)] transition-all duration-200 hover:bg-ink-soft active:scale-[0.98]"
               >
-                Start a project
+                Discuss a project
                 <svg
                   className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   viewBox="0 0 24 24"
@@ -156,7 +157,7 @@ export function Header({ activeSection }: HeaderProps) {
                 href="#contact"
                 className="inline-flex h-9 items-center rounded-full bg-ink px-4 text-[12.5px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pill)]"
               >
-                Start
+                Discuss
               </a>
               <button
                 ref={triggerRef}
@@ -205,7 +206,7 @@ export function Header({ activeSection }: HeaderProps) {
                     onClick={() => setMobileOpen(false)}
                     className="inline-flex h-9 items-center rounded-full bg-ink px-4 text-[12.5px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pill)]"
                   >
-                    Start a project
+                    Discuss a project
                   </a>
                   <button
                     ref={closeBtnRef}

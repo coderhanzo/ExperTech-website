@@ -3,9 +3,9 @@ import { ChevronUp } from "lucide-react";
 import { ArrowUpRight, Blob, GlowOrb, LogoMark, NoiseLayer, Ring } from "./primitives";
 
 const TRUST_ITEMS = [
-  { value: "12", label: "Yrs combined exp" },
-  { value: "3", label: "Industries built for" },
-  { value: "100%", label: "Custom backends" },
+  { value: "Web", label: "Customer platforms" },
+  { value: "Mobile", label: "Product experiences" },
+  { value: "Ops", label: "Business systems" },
 ];
 
 /* ──────────────────────────────────────────────────────────────────
@@ -190,17 +190,16 @@ export function Hero() {
             </div>
 
             <h1 className="mt-5 text-balance text-hero text-ink md:mt-7">
-              Building intelligent{" "}
-              <em className="accent-italic">digital systems</em>
+              Software built around{" "}
+              <em className="accent-italic">how your business</em>
               <br className="hidden sm:block" />
-              {" "}for what comes next.
+              {" "}actually works.
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-pretty text-[15.5px] leading-[1.65] text-ink-soft md:mt-7 md:text-[19px] md:leading-[1.7] md:text-muted">
-              NeuraForge Systems brings senior engineers and product thinkers
-              together to design, build, and scale web platforms, SaaS products,
-              and AI automation for companies ready to turn their biggest ideas
-              into durable technology.
+              We design and engineer web platforms, mobile applications and
+              operational systems for businesses ready to modernise, scale or
+              launch something new.
             </p>
 
             <div className="mt-7 flex flex-col items-stretch justify-center gap-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 md:mt-10">
@@ -209,7 +208,7 @@ export function Hero() {
                 className="group inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full bg-ink px-6 text-[14.5px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pill)] transition-all duration-200 hover:bg-ink-soft active:scale-[0.98] sm:h-13 sm:px-7 sm:text-[15px]"
                 style={{ minHeight: 48 }}
               >
-                Start a project
+                Discuss a project
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
@@ -217,7 +216,7 @@ export function Hero() {
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/12 bg-white/10 px-6 text-[14.5px] font-medium text-ink no-underline backdrop-blur-md transition-all duration-200 hover:bg-white/15 active:scale-[0.98] sm:h-13 sm:px-7 sm:text-[15px]"
                 style={{ minHeight: 48 }}
               >
-                See our work
+                View our work
               </a>
             </div>
 

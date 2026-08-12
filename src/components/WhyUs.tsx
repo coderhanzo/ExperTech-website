@@ -9,18 +9,18 @@ import {
 const WHY = [
   {
     k: "01",
-    title: "Senior by default",
-    body: "Every engineer on your project has shipped production software for ten-plus years. No rotating juniors, no learning on your time, no bait-and-switch after the SOW is signed.",
+    title: "Direct access",
+    body: "The people making product and engineering decisions stay close to the work and to your team.",
   },
   {
     k: "02",
-    title: "Product thinking, not ticket-pushing",
-    body: "We will push back on a ticket that doesn't make sense and propose the one that should exist instead. You're paying for judgment, not just throughput.",
+    title: "Decisions before code",
+    body: "We clarify the workflow, constraints and measure of success before adding technical complexity.",
   },
   {
     k: "03",
-    title: "Built to hand off",
-    body: "Tests, docs, runbooks, and an architecture a new hire can read in an afternoon. The day we leave, your team shouldn't notice a capability gap.",
+    title: "Built for ownership",
+    body: "Clear architecture, documentation and operational visibility make the system easier to run after launch.",
   },
 ] as const;
 
@@ -40,11 +40,10 @@ export function WhyUs() {
 
       <div className="container-page relative z-10">
         <SectionHeading
-          eyebrow="Why clients stay"
+          eyebrow="Why NeuraForge"
           title={
             <>
-              Three differences you'll feel in the{" "}
-              <AccentItalic>first sprint</AccentItalic>.
+              A senior team, close to the <AccentItalic>problem</AccentItalic>.
             </>
           }
         />

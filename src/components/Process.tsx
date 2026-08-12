@@ -9,27 +9,27 @@ import {
 const PHASES = [
   {
     step: "01",
-    title: "Discover",
-    body: "Two weeks of deep listening — to your users, your data, your team. We leave with a written thesis on what to build, what to cut, and what's going to hurt.",
-    dur: "~2 weeks",
+    title: "Understand",
+    body: "Map the users, operating reality, constraints and commercial outcome before prescribing a system.",
+    dur: "Context",
   },
   {
     step: "02",
-    title: "Architect",
-    body: "We draw the system end-to-end before the first commit. Data models, service boundaries, infrastructure, evals — committed to a doc your engineering lead signs off on.",
-    dur: "~2 weeks",
+    title: "Define",
+    body: "Turn the problem into a focused scope, delivery plan and technical approach with risks made visible.",
+    dur: "Scope",
   },
   {
     step: "03",
     title: "Build",
-    body: "Weekly shippable slices, visible progress, working software. Pair-programming with your team where it helps. No silent phases, no surprise demos.",
-    dur: "8–16 weeks",
+    body: "Deliver working slices, review them in context and adjust with evidence instead of waiting for a final reveal.",
+    dur: "Delivery",
   },
   {
     step: "04",
-    title: "Scale",
-    body: "Handoff with runbooks, on-call coverage, and optional retainer. We stay long enough for your team to own it — and no longer than that.",
-    dur: "ongoing",
+    title: "Operate",
+    body: "Launch with documentation, monitoring and a clear path for ownership, support and the next release.",
+    dur: "Ownership",
   },
 ] as const;
 
@@ -52,11 +52,10 @@ export function Process() {
           eyebrow="How we work"
           title={
             <>
-              A process that survives{" "}
-              <AccentItalic>first contact</AccentItalic> with reality.
+              Clear decisions. <AccentItalic>Visible progress</AccentItalic>.
             </>
           }
-          description="Most engagements fail in the handoffs between phases, not inside them. Ours is designed to make those handoffs obvious, short, and well-documented."
+          description="The shape changes with the engagement; the discipline does not. You see what is being decided, built and learned throughout."
         />
 
         <div className="relative mt-14">

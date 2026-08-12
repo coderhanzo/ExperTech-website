@@ -4,18 +4,20 @@ import { GlowOrb, LogoMark, NoiseLayer } from "./primitives";
 
 const NAV_LINKS = [
   { label: "Home", href: "#hero" },
-  { label: "Story", href: "#story" },
   { label: "Services", href: "#services" },
+  { label: "Solutions", href: "#solutions" },
   { label: "Work", href: "#work" },
+  { label: "Products", href: "#products" },
+  { label: "About", href: "#about" },
   { label: "Process", href: "#process" },
   { label: "FAQ", href: "#faq" },
 ];
 
 const SVC_LINKS = [
-  { label: "Custom web & SaaS", href: "#services" },
-  { label: "Backend & platforms", href: "#services" },
-  { label: "AI systems", href: "#services" },
-  { label: "Technical audits", href: "#services" },
+  { label: "Digital products", href: "#services" },
+  { label: "Business operations", href: "#services" },
+  { label: "Booking management", href: "#solutions" },
+  { label: "Ecommerce platforms", href: "#solutions" },
 ];
 
 // Only list socials with real URLs. Empty/"#" hrefs hurt SEO (broken outbound links)
@@ -66,9 +68,8 @@ export function Footer() {
                 </div>
               </div>
               <p className="mt-5 max-w-[320px] text-[14.5px] leading-[1.7] text-ink-soft">
-                An independent software studio building web platforms, SaaS
-                products, and AI systems for companies that take their
-                software seriously.
+                Software that helps businesses operate, sell and scale—built
+                around the workflows, customers and teams it needs to serve.
               </p>
               <div className="mt-7 flex gap-2">
                 {SOCIAL.map(({ label, href, Icon }) => (

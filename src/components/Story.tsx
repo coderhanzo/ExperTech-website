@@ -9,7 +9,7 @@ import {
 export function Story() {
   return (
     <section
-      id="story"
+      id="about"
       className="relative isolate overflow-hidden section-pad-md"
       style={{ scrollMarginTop: 96 }}
     >
@@ -22,10 +22,10 @@ export function Story() {
 
       <div className="container-page relative z-10 grid items-start gap-12 md:grid-cols-[5fr_7fr]">
         <SectionHeading
-          eyebrow="Our story"
+          eyebrow="About NeuraForge"
           title={
             <>
-              A studio, not an <AccentItalic>agency</AccentItalic>.
+              Engineering close to the <AccentItalic>business problem</AccentItalic>.
             </>
           }
         />
@@ -33,20 +33,18 @@ export function Story() {
           <GlassCard className="p-8 md:p-10">
             <div className="flex flex-col gap-5 text-[17px] leading-[1.75] text-ink-soft">
               <p>
-                NeuraForge started with a simple conviction: the best software
-                should last far beyond the launch. We built a small, senior
-                team that treats every
-                codebase like something it will have to maintain for years.
+                NeuraForge designs and builds software that helps businesses
+                operate, sell and scale. We work where customer experience,
+                internal operations and dependable engineering meet.
               </p>
               <p>
-                We partner with founders, product teams, and operations leaders
-                who need software that behaves under pressure. That means clear
-                architecture, honest estimates, and engineers who can talk to
-                your CFO as easily as they can talk to your platform team.
+                We partner with founders, product teams and operations leaders
+                who need software to fit the reality of their business. That
+                means understanding the workflow before prescribing the stack.
               </p>
               <p>
-                No pods. No layers of account management. The people writing
-                your code are the people you meet on day one.
+                The people making product and engineering decisions stay close
+                to the work—from the first conversation through launch and handoff.
               </p>
             </div>
           </GlassCard>
