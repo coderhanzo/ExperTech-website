@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { ChevronUp } from "lucide-react";
 import { ArrowUpRight, Blob, GlowOrb, LogoMark, NoiseLayer, Ring } from "./primitives";
 
 const TRUST_ITEMS = [
@@ -9,39 +8,15 @@ const TRUST_ITEMS = [
 ];
 
 /* ──────────────────────────────────────────────────────────────────
-   Studio status pill — live Accra time + holiday overrides
-   Edit availability / holidays here; falls back to the static string
-   on first render before hydration.
+    Studio status pill — live Accra time
    ────────────────────────────────────────────────────────────────── */
 const STUDIO_CONFIG = {
-  city: "Accra",
   timezone: "Africa/Accra",
-  availability: "Available Q4 2026",
   // Used on the very first render before the hook mounts (avoids hydration flash).
-  fallbackShort: "Available Q4 2026",
-  fallbackLong: "Independent software studio · Available Q4 2026",
+  fallback: "--:-- GMT",
 } as const;
 
-// MM-DD → greeting. Keep statements short; the pill is narrow.
-const HOLIDAYS: Record<string, string> = {
-  "01-01": "Happy New Year",
-  "03-06": "Happy Independence Day · Ghana",
-  "05-01": "May Day",
-  "07-01": "Republic Day · Ghana",
-  "08-04": "Founders' Day",
-  "09-21": "Kwame Nkrumah Memorial Day",
-  "12-25": "Merry Christmas",
-  "12-26": "Boxing Day",
-  "12-31": "Happy New Year's Eve",
-};
-
-interface StudioStatus {
-  short: string;
-  long: string;
-  isHoliday: boolean;
-}
-
-function computeStudioStatus(): StudioStatus {
+function computeStudioStatus(): string {
   const now = new Date();
   const tz = STUDIO_CONFIG.timezone;
 
@@ -52,34 +27,12 @@ function computeStudioStatus(): StudioStatus {
     hour12: false,
   }).format(now);
 
-  const dateISO = new Intl.DateTimeFormat("en-CA", {
-    timeZone: tz,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(now); // "YYYY-MM-DD"
-
-  const [, month, day] = dateISO.split("-");
-  const holiday = HOLIDAYS[`${month}-${day}`];
-
-  if (holiday) {
-    return {
-      short: `${holiday} · ${time} GMT`,
-      long: `${holiday} · ${STUDIO_CONFIG.city} · ${time} GMT`,
-      isHoliday: true,
-    };
-  }
-
-  return {
-    short: `${STUDIO_CONFIG.city} · ${time} · ${STUDIO_CONFIG.availability}`,
-    long: `${STUDIO_CONFIG.city} · ${time} GMT · ${STUDIO_CONFIG.availability}`,
-    isHoliday: false,
-  };
+  return `${time} GMT`;
 }
 
-function useStudioStatus(): StudioStatus | null {
+function useStudioStatus(): string | null {
   // null on first render → render fallback. After mount, returns live status.
-  const [status, setStatus] = useState<StudioStatus | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
 
   useEffect(() => {
     setStatus(computeStudioStatus());
@@ -179,14 +132,7 @@ export function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
               </span>
-              <span>
-                <span className="hidden sm:inline">
-                  {status ? status.long : STUDIO_CONFIG.fallbackLong}
-                </span>
-                <span className="sm:hidden">
-                  {status ? status.short : STUDIO_CONFIG.fallbackShort}
-                </span>
-              </span>
+              <span>{status ?? STUDIO_CONFIG.fallback}</span>
             </div>
 
             <h1 className="mt-5 text-balance text-hero text-ink md:mt-7">
@@ -239,28 +185,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Scroll indicator — desktop only (mobile has natural scroll affordance) */}
-        <a
-          href="#trust"
-          aria-label="Scroll to next section"
-          className="group absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 no-underline md:block"
-        >
-          <div className="flex flex-col items-center gap-2.5">
-            <span className="text-[10.5px] font-medium uppercase tracking-[0.32em] text-ink-soft/70 transition-colors duration-200 group-hover:text-ink">
-              Scroll
-            </span>
-            <div className="relative flex h-10 w-6 items-end justify-center rounded-full border border-ink/25 bg-white/8 pb-2 backdrop-blur-md transition-colors duration-200 group-hover:border-ink/50">
-              <span
-                aria-hidden
-                className="scroll-cue-dot block h-1.5 w-1.5 rounded-full bg-ink/70"
-              />
-            </div>
-            <ChevronUp
-              aria-hidden
-              className="scroll-cue-arrow h-3.5 w-3.5 text-ink/50"
-            />
-          </div>
-        </a>
       </div>
     </section>
   );

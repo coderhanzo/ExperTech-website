@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { TrustStrip } from "./components/TrustStrip";
+import { ForgeStory } from "./components/ForgeStory";
 import { StackSection } from "./components/StackSection";
 import { Story } from "./components/Story";
 import { Services } from "./components/Services";
@@ -14,10 +15,13 @@ import { FAQ } from "./components/FAQ";
 import { Contact } from "./components/Contact";
 import { FinalCta } from "./components/FinalCta";
 import { Footer } from "./components/Footer";
+import { AssistantLauncher } from "./components/AssistantLauncher";
+import { NeuralJourney } from "./components/NeuralJourney";
 // import { LogoConcepts } from "./components/LogoConcepts";
 
 const SECTION_IDS = [
   "hero",
+  "forge",
   "work",
   "services",
   "solutions",
@@ -64,10 +68,12 @@ export default function App() {
         Skip to content
       </a>
       <Header activeSection={active} />
-      <main id="main">
+      <main id="main" className="neural-main relative isolate">
+        <NeuralJourney />
         {/* <LogoConcepts /> */}
         <Hero />
         <TrustStrip />
+        <ForgeStory />
         <Work />
         <Services />
         <Solutions />
@@ -81,6 +87,7 @@ export default function App() {
         <FinalCta />
       </main>
       <Footer />
+      <AssistantLauncher />
     </>
   );
 }

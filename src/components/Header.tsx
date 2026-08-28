@@ -47,17 +47,38 @@ interface HeaderProps {
   activeSection: string;
 }
 
+type HeaderTheme = "dark" | "light";
+
 export function Header({ activeSection }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
+  const [theme, setTheme] = useState<HeaderTheme>("dark");
   const [mobileOpen, setMobileOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    let frame = 0;
+    const updateHeader = () => {
+      setScrolled(window.scrollY > 24);
+      const themeOwner = document
+        .elementsFromPoint(window.innerWidth / 2, 44)
+        .map((element) => element.closest<HTMLElement>("[data-header-theme]"))
+        .find((element): element is HTMLElement => element !== null);
+      setTheme(themeOwner?.dataset.headerTheme === "light" ? "light" : "dark");
+      frame = 0;
+    };
+    const requestUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateHeader);
+    };
+    updateHeader();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    return () => {
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -82,24 +103,29 @@ export function Header({ activeSection }: HeaderProps) {
     if (!mobileOpen) triggerRef.current?.focus({ preventScroll: true });
   }, [mobileOpen]);
 
+  const isLight = theme === "light";
+
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-3 z-40 transition-all duration-300 md:top-4 ${
-          scrolled ? "" : ""
-        }`}
+        data-theme={theme}
+        className="fixed inset-x-0 top-3 z-40 transition-all duration-300 md:top-4"
       >
         <div className="container-page">
           {/* Desktop pill */}
           <div
-            className={`hidden md:flex items-center justify-between gap-3 rounded-full px-2.5 py-2 transition-all duration-300 ${
-              scrolled
-                ? "glass-pill"
-                : "border border-white/12 bg-white/8 backdrop-blur-xl shadow-[var(--shadow-pill)]"
+            className={`hidden items-center justify-between gap-3 rounded-full px-2.5 transition-all duration-300 md:flex ${
+              scrolled ? "py-1.5" : "py-2"
+            } ${
+              isLight
+                ? "border border-black/10 bg-[#efeae2]/88 shadow-[0_12px_38px_-22px_rgba(30,27,23,.35)] backdrop-blur-2xl"
+                : scrolled
+                  ? "glass-pill"
+                  : "border border-white/12 bg-white/8 backdrop-blur-xl shadow-[var(--shadow-pill)]"
             }`}
           >
             <div className="pl-3">
-              <Logo />
+              <Logo tone={isLight ? "light" : "dark"} />
             </div>
 
             <nav
@@ -114,9 +140,13 @@ export function Header({ activeSection }: HeaderProps) {
                     href={`#${item.id}`}
                     aria-current={isActive ? "page" : undefined}
                     className={`relative rounded-full px-3.5 py-2 text-[13.5px] font-medium no-underline transition-colors duration-200 ${
-                      isActive
-                        ? "bg-white/12 text-ink shadow-[var(--shadow-glass-inner)]"
-                        : "text-ink-soft hover:bg-white/8 hover:text-ink"
+                      isLight
+                        ? isActive
+                          ? "bg-black/[0.065] text-[#171918]"
+                          : "text-[#5f625f] hover:bg-black/[0.045] hover:text-[#171918]"
+                        : isActive
+                          ? "bg-white/12 text-ink shadow-[var(--shadow-glass-inner)]"
+                          : "text-ink-soft hover:bg-white/8 hover:text-ink"
                     }`}
                   >
                     {item.label}
@@ -128,7 +158,11 @@ export function Header({ activeSection }: HeaderProps) {
             <div className="flex items-center gap-2 pr-1">
               <a
                 href="#contact"
-                className="group inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full bg-ink px-5 text-[13.5px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pill)] transition-all duration-200 hover:bg-ink-soft active:scale-[0.98]"
+                className={`group inline-flex h-10 cursor-pointer items-center gap-1.5 rounded-full px-5 text-[13.5px] font-medium tracking-tight no-underline shadow-[var(--shadow-pill)] transition-all duration-200 active:scale-[0.98] ${
+                  isLight
+                    ? "bg-[#171918] text-[#f7f5f0] hover:bg-[#303431]"
+                    : "bg-ink text-canvas hover:bg-ink-soft"
+                }`}
               >
                 Discuss a project
                 <svg
@@ -148,9 +182,13 @@ export function Header({ activeSection }: HeaderProps) {
           </div>
 
           {/* Mobile pill */}
-          <div className="md:hidden flex items-center justify-between gap-2 rounded-full glass-pill px-2.5 py-2">
+          <div className={`flex items-center justify-between gap-2 rounded-full border px-2.5 py-2 shadow-[var(--shadow-pill)] backdrop-blur-2xl transition-colors duration-300 md:hidden ${
+            isLight
+              ? "border-black/10 bg-[#efeae2]/90"
+              : "border-white/15 bg-white/10"
+          }`}>
             <div className="pl-2">
-              <Logo />
+              <Logo tone={isLight ? "light" : "dark"} />
             </div>
             <div className="flex items-center gap-1.5">
               <a
@@ -166,7 +204,11 @@ export function Header({ activeSection }: HeaderProps) {
                 aria-label="Open menu"
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-drawer"
-                className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/12 bg-white/10 text-ink-soft backdrop-blur-md transition-colors duration-200 hover:bg-white/15 hover:text-ink"
+                className={`inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border backdrop-blur-md transition-colors duration-200 ${
+                  isLight
+                    ? "border-black/10 bg-black/[0.045] text-[#303431] hover:bg-black/[0.08]"
+                    : "border-white/12 bg-white/10 text-ink-soft hover:bg-white/15 hover:text-ink"
+                }`}
               >
                 <Menu className="h-4 w-4" aria-hidden />
               </button>

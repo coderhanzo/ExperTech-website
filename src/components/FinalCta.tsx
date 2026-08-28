@@ -1,4 +1,5 @@
 import { ArrowUpRight, GlowOrb, NoiseLayer } from "./primitives";
+import { CTAConvergence } from "./NeuralJourney";
 
 export function FinalCta() {
   return (
@@ -8,7 +9,7 @@ export function FinalCta() {
       style={{ scrollMarginTop: 96 }}
     >
       <div className="container-page">
-        <div className="relative isolate overflow-hidden rounded-[var(--radius-section)] glass-dark px-7 py-20 md:px-16 md:py-28">
+        <div className="final-cta-panel relative isolate overflow-hidden rounded-[var(--radius-section)] glass-dark px-7 py-20 md:px-16 md:py-28">
           <GlowOrb
             size={780}
             color="rgba(175, 92, 65, 0.18)"
@@ -21,7 +22,8 @@ export function FinalCta() {
           />
           <NoiseLayer />
 
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative z-10 grid items-center gap-12 lg:grid-cols-[1.12fr_.88fr] lg:gap-8">
+            <div className="max-w-3xl">
             <span className="text-[11px] font-medium uppercase tracking-[0.22em] text-accent-soft">
               Ready when you are
             </span>
@@ -39,7 +41,7 @@ export function FinalCta() {
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <a
                 href="#contact"
-                className="group inline-flex h-13 cursor-pointer items-center gap-2 rounded-full bg-accent px-7 text-[15px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pop)] transition-colors duration-200 hover:bg-accent-hover active:scale-[0.98]"
+                className="final-cta-button group inline-flex h-13 cursor-pointer items-center gap-2 rounded-full bg-accent px-7 text-[15px] font-medium tracking-tight text-canvas no-underline shadow-[var(--shadow-pop)] transition-colors duration-200 hover:bg-accent-hover active:scale-[0.98]"
                 style={{ height: 52 }}
               >
                 Discuss a project
@@ -54,6 +56,9 @@ export function FinalCta() {
                 or email neuraforgesys@gmail.com
               </a>
             </div>
+            </div>
+
+            <CTAConvergence />
           </div>
         </div>
       </div>

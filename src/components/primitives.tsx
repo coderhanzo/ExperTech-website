@@ -16,7 +16,10 @@ export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
   );
 }
 
-export function Logo() {
+export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
+  const wordmark = tone === "light" ? "text-[#171918]" : "text-ink";
+  const descriptor = tone === "light" ? "text-[#666b67]" : "text-muted";
+
   return (
     <a
       href="#hero"
@@ -24,11 +27,11 @@ export function Logo() {
       aria-label="NeuraForge Systems — home"
     >
       <LogoMark className="h-10 w-10" />
-      <span className="flex flex-col leading-none text-ink">
+      <span className={`flex flex-col leading-none transition-colors duration-300 ${wordmark}`}>
         <span className="font-serif text-[14px] font-semibold uppercase tracking-[0.16em]">
           Neura<span className="text-accent-soft">Forge</span>
         </span>
-        <span className="mt-1 text-[7px] font-semibold uppercase tracking-[0.48em] text-muted">
+        <span className={`mt-1 text-[7px] font-semibold uppercase tracking-[0.48em] transition-colors duration-300 ${descriptor}`}>
           Systems
         </span>
       </span>
