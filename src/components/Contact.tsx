@@ -1,142 +1,58 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { useForm, ValidationError } from "@formspree/react";
-import { ArrowLeft, ArrowRight, Check, Mail, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Check, Mail, MessageCircle } from "lucide-react";
+import { site } from "../data/site";
 import { getAttribution, trackEvent } from "../lib/analytics";
-import { AccentItalic, GlassCard, GlowOrb, NoiseLayer, SectionHeading } from "./primitives";
 
-const PROJECT_TYPES = ["Website / web application", "Mobile application", "Business system", "Ecommerce platform", "AI / automation", "Improve an existing system", "Product access / demo", "Not sure yet"] as const;
-const BUDGETS = ["Under $10k", "$10k–$25k", "$25k–$50k", "$50k+", "Not defined yet"] as const;
-const TIMELINES = ["As soon as practical", "Within 3 months", "3–6 months", "6+ months", "Exploring"] as const;
-const STEPS = ["Project", "Context", "Parameters", "Contact"] as const;
+const EMPTY = { projectType: "", description: "", budget: "", timeline: "", name: "", email: "", company: "" };
 const STORAGE_KEY = "neuraforge_project_enquiry";
-const FORMSPREE_FORM_ID = "meajgvda";
-const WHATSAPP_URL = "https://wa.me/233203758021?text=Hello%20NeuraForge%20Systems%2C%20I%27d%20like%20to%20discuss%20a%20project.";
 
-interface Values { projectType: string; description: string; budget: string; timeline: string; name: string; email: string; company: string; }
-interface SubmissionFields {
-  name: string;
-  email: string;
-  company: string;
-  message: string;
-  project_type: string;
-  budget: string;
-  timeline: string;
-  lead_type: string;
-  _subject: string;
-  [key: string]: string;
+function readDraft() {
+  try {
+    const draft = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null");
+    return Object.fromEntries(Object.entries(EMPTY).map(([key, value]) => [key, typeof draft?.[key] === "string" ? draft[key] : value])) as typeof EMPTY;
+  } catch { return EMPTY; }
 }
-const EMPTY: Values = { projectType: "", description: "", budget: "", timeline: "", name: "", email: "", company: "" };
 
 export function Contact() {
-  const [step, setStep] = useState(0);
-  const [values, setValues] = useState<Values>(() => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null") ?? EMPTY; }
-    catch { return EMPTY; }
-  });
-  const [message, setMessage] = useState("");
-  const [started, setStarted] = useState(false);
+  const [values, setValues] = useState(readDraft);
+  const [error, setError] = useState("");
+  const [state, send] = useForm(site.formId);
   const attribution = useMemo(() => getAttribution(), []);
-  const [formState, submitToFormspree] = useForm<SubmissionFields>(FORMSPREE_FORM_ID);
-  const trackedSubmission = useRef(false);
-  const isProduct = values.projectType === "Product access / demo";
-
-  useEffect(() => { if (!formState.succeeded) localStorage.setItem(STORAGE_KEY, JSON.stringify(values)); }, [values, formState.succeeded]);
+  const started = useRef(false);
+  const tracked = useRef(false);
   useEffect(() => {
-    if (!formState.succeeded || trackedSubmission.current) return;
-    trackedSubmission.current = true;
-    localStorage.removeItem(STORAGE_KEY);
-    trackEvent(isProduct ? "product_waitlist_joined" : "project_enquiry_submitted", {
-      project_type: values.projectType,
-      budget: values.budget,
-      timeline: values.timeline,
-      source: attribution.utm_source,
-    });
-  }, [formState.succeeded, isProduct, values, attribution]);
-  useEffect(() => {
-    const selectProduct = () => setValues((current) => ({ ...current, projectType: "Product access / demo" }));
-    window.addEventListener("neuraforge:product-interest", selectProduct);
-    return () => window.removeEventListener("neuraforge:product-interest", selectProduct);
-  }, []);
-
-  const update = (field: keyof Values, value: string) => setValues((current) => ({ ...current, [field]: value }));
-  const validationMessage = () => {
-    if (step === 0 && !values.projectType) return "Choose the closest project type to continue.";
-    if (step === 1 && values.description.trim().length < 20) return "Add a little more context so the first conversation can be useful.";
-    if (step === 2 && (!values.budget || !values.timeline)) return "Select a budget range and timing. ‘Not defined’ and ‘Exploring’ are valid answers.";
-    if (step === 3 && (!values.name.trim() || !/^\S+@\S+\.\S+$/.test(values.email))) return "Enter your name and a valid email address.";
-    return "";
-  };
-  const focusWizard = () => requestAnimationFrame(() => document.getElementById("enquiry-wizard")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }));
-  const next = () => {
-    const error = validationMessage();
-    if (error) { setMessage(error); return; }
-    if (!started) { setStarted(true); trackEvent("project_enquiry_started", { source: attribution.utm_source, landing_page: attribution.landing_page }); }
-    trackEvent("project_enquiry_step_completed", { step: step + 1, project_type: values.projectType });
-    setMessage(""); setStep((current) => Math.min(current + 1, STEPS.length - 1)); focusWizard();
-  };
-
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    try {
+      if (state.succeeded) localStorage.removeItem(STORAGE_KEY);
+      else localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+    } catch { /* Drafts are optional when browser storage is unavailable. */ }
+    if (state.succeeded && !tracked.current) {
+      tracked.current = true;
+      trackEvent(values.projectType === "Product access / demo" ? "product_waitlist_joined" : "project_enquiry_submitted", { project_type: values.projectType, budget: values.budget, timeline: values.timeline, source: attribution.utm_source });
+    }
+  }, [values, state.succeeded, attribution]);
+  const update = (field: keyof typeof EMPTY, value: string) => setValues((current) => ({ ...current, [field]: value }));
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const error = validationMessage();
-    if (error) { setMessage(error); return; }
-    setMessage("");
-    await submitToFormspree({
-      name: values.name,
-      email: values.email,
-      company: values.company,
-      message: values.description,
-      project_type: values.projectType,
-      budget: values.budget,
-      timeline: values.timeline,
-      lead_type: isProduct ? "product" : "service",
-      _subject: `New ${isProduct ? "product" : "project"} enquiry — NeuraForge Systems`,
-      ...attribution,
-    });
-  };
-
-  const choiceClass = (selected: boolean) => `min-h-12 rounded-2xl border px-4 py-3 text-left text-[13px] font-medium transition-all ${selected ? "border-accent/50 bg-accent/15 text-accent-soft shadow-[var(--shadow-glass-inner)]" : "border-white/12 bg-white/8 text-ink-soft hover:bg-white/14 hover:text-ink"}`;
-  const inputClass = "w-full rounded-2xl border border-white/12 bg-white/10 px-4 py-3 text-[15px] text-ink outline-none placeholder:text-muted backdrop-blur focus:border-ink/40";
-
-  return (
-    <section id="contact" className="relative isolate overflow-hidden section-pad-md" style={{ scrollMarginTop: 96 }}>
-      <GlowOrb size={520} color="rgba(175, 92, 65, 0.10)" className="-top-24 -right-32" />
-      <GlowOrb size={460} color="rgba(120, 190, 195, 0.16)" className="-bottom-32 -left-20" />
-      <NoiseLayer />
-      <div className="container-page relative z-10 grid gap-12 md:grid-cols-[5fr_7fr] md:gap-14">
-        <div>
-          <SectionHeading eyebrow="Project enquiry" title={<>Tell us what the software needs to <AccentItalic>do</AccentItalic>.</>} description="A few focused questions help us understand your project and make the first conversation useful. Progress is saved on this device." />
-          <GlassCard className="mt-9 p-6 md:p-7">
-            <div className="space-y-4">
-              <a href="mailto:neuraforgesys@gmail.com" onClick={() => trackEvent("email_click")} className="flex items-center gap-4 text-ink-soft no-underline hover:text-ink"><span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/12 bg-white/12"><Mail className="h-4 w-4" /></span><span><span className="block text-[10px] uppercase tracking-[0.18em] text-muted">Email</span><span className="mt-1 block text-[14px]">neuraforgesys@gmail.com</span></span></a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click")} className="flex items-center gap-4 text-ink-soft no-underline hover:text-ink"><span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/12 bg-white/12"><MessageCircle className="h-4 w-4" /></span><span><span className="block text-[10px] uppercase tracking-[0.18em] text-muted">WhatsApp</span><span className="mt-1 block text-[14px]">+233 (0) 20 375 8021</span></span></a>
-            </div>
-          </GlassCard>
-        </div>
-
-        <form id="enquiry-wizard" onSubmit={submit} aria-busy={formState.submitting} className="relative scroll-mt-24 overflow-hidden rounded-[var(--radius-card-lg)] glass-card p-6 md:p-9">
-          <NoiseLayer />
-          <input type="hidden" name="project_type" value={values.projectType} />
-          <input type="hidden" name="budget" value={values.budget} />
-          <input type="hidden" name="timeline" value={values.timeline} />
-          <input type="hidden" name="lead_type" value={isProduct ? "product" : "service"} />
-          <input type="hidden" name="_subject" value={`New ${isProduct ? "product" : "project"} enquiry — NeuraForge Systems`} />
-          {Object.entries(attribution).map(([name, value]) => <input key={name} type="hidden" name={name} value={value} />)}
-          <p className="sr-only" role="status" aria-live="polite">Step {step + 1} of {STEPS.length}: {STEPS[step]}</p>
-          <div className="relative z-10 grid grid-cols-4 gap-2 border-b border-white/12 pb-6" aria-label={`Step ${step + 1} of ${STEPS.length}`}>
-            {STEPS.map((label, index) => <div key={label} className="min-w-0"><div className={`h-1 rounded-full ${index <= step ? "bg-accent" : "bg-white/12"}`} /><div className={`mt-2 truncate text-[9px] uppercase tracking-[0.12em] ${index === step ? "text-accent-soft" : "text-muted"}`}>{label}</div></div>)}
-          </div>
-
-          <div className="relative z-10 min-h-[390px] py-8">
-            {formState.succeeded ? <div role="status" className="flex min-h-[320px] flex-col justify-center"><span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-canvas"><Check className="h-5 w-5" /></span><h3 className="mt-6 font-serif text-[30px] text-ink">Enquiry received.</h3><p className="mt-4 max-w-lg text-[15px] leading-[1.7] text-muted">We’ll review the context and reply within two business days with useful next questions or a suggested conversation.</p></div>
-            : step === 0 ? <fieldset><legend className="font-serif text-[26px] text-ink">What are you looking to build?</legend><p className="mt-2 text-[13px] text-muted">Choose the closest answer. It does not lock the scope.</p><div className="mt-6 grid gap-2 sm:grid-cols-2">{PROJECT_TYPES.map((type) => <button key={type} type="button" onClick={() => update("projectType", type)} aria-pressed={values.projectType === type} className={choiceClass(values.projectType === type)}>{type}</button>)}</div></fieldset>
-            : step === 1 ? <div><label htmlFor="project-context" className="font-serif text-[26px] text-ink">What needs to change?</label><p className="mt-2 text-[13px] text-muted">Describe the current situation, the people involved and what a good outcome looks like.</p><textarea id="project-context" name="message" value={values.description} onChange={(event) => update("description", event.target.value)} rows={8} minLength={20} maxLength={4000} className={`${inputClass} mt-6 resize-y`} placeholder="For example: our team currently manages appointments and payments across several tools…" /><ValidationError field="message" errors={formState.errors} className="mt-2 text-[13px] text-red-200" /></div>
-            : step === 2 ? <div className="grid gap-8 sm:grid-cols-2"><fieldset><legend className="font-serif text-[22px] text-ink">Indicative budget</legend><div className="mt-5 grid gap-2">{BUDGETS.map((item) => <button key={item} type="button" onClick={() => update("budget", item)} aria-pressed={values.budget === item} className={choiceClass(values.budget === item)}>{item}</button>)}</div></fieldset><fieldset><legend className="font-serif text-[22px] text-ink">Timing</legend><div className="mt-5 grid gap-2">{TIMELINES.map((item) => <button key={item} type="button" onClick={() => update("timeline", item)} aria-pressed={values.timeline === item} className={choiceClass(values.timeline === item)}>{item}</button>)}</div></fieldset></div>
-            : <div><h3 className="font-serif text-[26px] text-ink">Where should we reply?</h3><p className="mt-2 text-[13px] text-muted">We use these details only to respond to this enquiry.</p><div className="mt-6 grid gap-4 sm:grid-cols-2"><div><label htmlFor="enquiry-name" className="mb-2 block text-[12px] font-medium text-ink">Name · required</label><input id="enquiry-name" name="name" autoComplete="name" value={values.name} onChange={(e) => update("name", e.target.value)} className={inputClass} /><ValidationError field="name" errors={formState.errors} className="mt-2 text-[13px] text-red-200" /></div><div><label htmlFor="enquiry-email" className="mb-2 block text-[12px] font-medium text-ink">Email · required</label><input id="enquiry-email" name="email" type="email" autoComplete="email" value={values.email} onChange={(e) => update("email", e.target.value)} className={inputClass} /><ValidationError field="email" errors={formState.errors} className="mt-2 text-[13px] text-red-200" /></div><div className="sm:col-span-2"><label htmlFor="enquiry-company" className="mb-2 block text-[12px] font-medium text-ink">Company · optional</label><input id="enquiry-company" name="company" autoComplete="organization" value={values.company} onChange={(e) => update("company", e.target.value)} className={inputClass} /></div></div></div>}
-          </div>
-
-          {!formState.succeeded && <div className="relative z-10 border-t border-white/12 pt-5">{message && <p role="status" className="mb-4 text-[13px] text-accent-soft">{message}</p>}<ValidationError errors={formState.errors} className="mb-4 text-[13px] text-red-200" /><div className="flex items-center justify-between gap-3"><button type="button" disabled={step === 0 || formState.submitting} onClick={() => { setMessage(""); setStep((current) => Math.max(0, current - 1)); focusWizard(); }} className="inline-flex h-11 items-center gap-2 rounded-full border border-white/12 bg-white/10 px-5 text-[13px] font-medium text-ink disabled:opacity-40"><ArrowLeft className="h-4 w-4" />Back</button>{step < STEPS.length - 1 ? <button type="button" onClick={next} className="inline-flex h-11 items-center gap-2 rounded-full border-none bg-ink px-6 text-[13px] font-medium text-canvas hover:bg-ink-soft">Continue<ArrowRight className="h-4 w-4" /></button> : <button type="submit" disabled={formState.submitting} className="inline-flex h-11 items-center gap-2 rounded-full border-none bg-accent px-6 text-[13px] font-medium text-canvas hover:bg-accent-hover disabled:opacity-60">{formState.submitting ? "Sending…" : "Send enquiry"}<ArrowRight className="h-4 w-4" /></button>}</div></div>}
-        </form>
-      </div>
-    </section>
-  );
+    if (!values.name.trim() || values.description.trim().length < 20) {
+      setError("Please add your name and at least 20 characters about your project.");
+      return;
+    }
+    setError("");
+    try {
+      await send({ name: values.name.trim(), email: values.email.trim(), company: values.company.trim(), message: values.description.trim(), project_type: values.projectType, budget: values.budget, timeline: values.timeline, lead_type: values.projectType === "Product access / demo" ? "product" : "service", _subject: "New project enquiry — NeuraForge Systems", ...attribution });
+    } catch { setError("We couldn’t send your enquiry. Please try again, or email us directly."); }
+  }
+  return <section id="contact" className="contact-section section"><div className="wrap contact-layout">
+    <div className="contact-intro reveal"><h2>What are you<br />working on?</h2><p>A new idea, a growing business, or a system that could work better. Let’s start there.</p><div className="contact-links"><a href={`mailto:${site.email}`} onClick={() => trackEvent("email_click")}><Mail size={20} /><span><small>Email us</small>{site.email}</span><ArrowUpRight size={18} /></a><a href={site.whatsapp} target="_blank" rel="noreferrer" onClick={() => trackEvent("whatsapp_click")}><MessageCircle size={20} /><span><small>Chat on WhatsApp</small>{site.phone}</span><ArrowUpRight size={18} /></a></div><p className="contact-note">Based in Accra.<br />Good conversations travel well.</p></div>
+    <div className="enquiry-form reveal">{state.succeeded ? <div className="form-success" role="status"><span><Check size={28} /></span><h3>You’re on our radar.</h3><p>Thanks for sharing your project. We’ll review your enquiry and reply within two business days.</p><a href="#work" className="text-link">Explore our work <ArrowUpRight size={18} /></a></div> : <form onSubmit={submit} aria-busy={state.submitting} onFocus={() => { if (!started.current) { started.current = true; trackEvent("project_enquiry_started", { source: attribution.utm_source, landing_page: attribution.landing_page }); } }}>
+      <h3>Tell us a little about it.</h3><p>Your progress is saved on this device.</p>
+      <div className="form-grid"><label>Your name<input name="name" autoComplete="name" required maxLength={150} placeholder="Alex Mensah" value={values.name} onChange={(event) => update("name", event.target.value)} /></label><label>Email address<input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="alex@company.com" value={values.email} onChange={(event) => update("email", event.target.value)} /></label>
+      <label className="full-width">Company <span>(optional)</span><input name="company" autoComplete="organization" maxLength={200} placeholder="Your company or organisation" value={values.company} onChange={(event) => update("company", event.target.value)} /></label>
+      <label className="full-width">What do you have in mind?<select name="project_type" required value={values.projectType} onChange={(event) => update("projectType", event.target.value)}><option value="" disabled>Select a project type</option>{["Website / web application", "Mobile application", "Business system", "Ecommerce platform", "AI / automation", "Improve an existing system", "Product access / demo", "Not sure yet"].map((type) => <option key={type}>{type}</option>)}</select></label>
+      <label>Indicative budget<select name="budget" required value={values.budget} onChange={(event) => update("budget", event.target.value)}><option value="" disabled>Select a range</option>{["Under $10k", "$10k–$25k", "$25k–$50k", "$50k+", "Not defined yet"].map((budget) => <option key={budget}>{budget}</option>)}</select></label><label>Timeline<select name="timeline" required value={values.timeline} onChange={(event) => update("timeline", event.target.value)}><option value="" disabled>Select a timeline</option>{["As soon as practical", "Within 3 months", "3–6 months", "6+ months", "Exploring"].map((timeline) => <option key={timeline}>{timeline}</option>)}</select></label>
+      <label className="full-width">A little about your project<textarea name="message" rows={4} required minLength={20} maxLength={4000} placeholder="What are you hoping to build or improve?" value={values.description} onChange={(event) => update("description", event.target.value)} /></label></div>
+      <ValidationError errors={state.errors} className="form-error" />{error && <p className="form-error" role="alert">{error}</p>}<div className="form-submit"><span>Just a conversation.<br />No commitment.</span><button type="submit" disabled={state.submitting} className="button">{state.submitting ? "Sending…" : "Send your enquiry"}<ArrowUpRight size={18} /></button></div>
+    </form>}</div>
+  </div></section>;
 }

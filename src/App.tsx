@@ -1,93 +1,66 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { TrustStrip } from "./components/TrustStrip";
-import { ForgeStory } from "./components/ForgeStory";
-import { StackSection } from "./components/StackSection";
-import { Story } from "./components/Story";
-import { Services } from "./components/Services";
-import { Solutions } from "./components/Solutions";
 import { Work } from "./components/Work";
-import { Products } from "./components/Products";
 import { Process } from "./components/Process";
-import { WhyUs } from "./components/WhyUs";
+import { Services } from "./components/Services";
+import { Story } from "./components/Story";
+import { Solutions } from "./components/Solutions";
 import { FAQ } from "./components/FAQ";
 import { Contact } from "./components/Contact";
-import { FinalCta } from "./components/FinalCta";
 import { Footer } from "./components/Footer";
-import { AssistantLauncher } from "./components/AssistantLauncher";
-import { NeuralJourney } from "./components/NeuralJourney";
-// import { LogoConcepts } from "./components/LogoConcepts";
-
-const SECTION_IDS = [
-  "hero",
-  "forge",
-  "work",
-  "services",
-  "solutions",
-  "products",
-  "process",
-  "about",
-  "why-us",
-  "faq",
-  "contact",
-  "final-cta",
-] as const;
-
-function useScrollSpy(ids: readonly string[]) {
-  const [active, setActive] = useState<string>(ids[0]);
-  useEffect(() => {
-    const observers = ids
-      .map((id) => {
-        const el = document.getElementById(id);
-        if (!el) return null;
-        const obs = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) setActive(id);
-          },
-          { rootMargin: "-30% 0px -60% 0px" },
-        );
-        obs.observe(el);
-        return obs;
-      })
-      .filter((o): o is IntersectionObserver => o !== null);
-    return () => observers.forEach((o) => o.disconnect());
-  }, [ids]);
-  return active;
-}
 
 export default function App() {
-  const active = useScrollSpy(SECTION_IDS);
+  useEffect(() => {
+    const sections = document.querySelectorAll<HTMLElement>(".parallax-gradient");
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      sections.forEach((section) => {
+        if (motion.matches) {
+          section.style.removeProperty("--parallax-y");
+          return;
+        }
+        const bounds = section.getBoundingClientRect();
+        if (bounds.bottom < 0 || bounds.top > innerHeight) return;
+        const offset = (innerHeight / 2 - bounds.top - bounds.height / 2) * .18;
+        section.style.setProperty("--parallax-y", `${Math.max(-110, Math.min(110, offset))}px`);
+      });
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    motion.addEventListener("change", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      motion.removeEventListener("change", schedule);
+    };
+  }, []);
 
-  return (
-    <>
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-canvas"
-      >
-        Skip to content
-      </a>
-      <Header activeSection={active} />
-      <main id="main" className="neural-main relative isolate">
-        <NeuralJourney />
-        {/* <LogoConcepts /> */}
-        <Hero />
-        <TrustStrip />
-        <ForgeStory />
-        <Work />
-        <Services />
-        <Solutions />
-        <Products />
-        <Process />
-        <Story />
-        <WhyUs />
-        <StackSection />
-        <FAQ />
-        <Contact />
-        <FinalCta />
-      </main>
-      <Footer />
-      <AssistantLauncher />
-    </>
-  );
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
+  return <>
+    <a className="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabIndex={-1}>
+      <Hero /><TrustStrip /><Work /><Process /><Services /><Story /><Solutions /><FAQ /><Contact />
+    </main>
+    <Footer />
+  </>;
 }

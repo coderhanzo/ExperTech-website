@@ -25,8 +25,12 @@ const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "ut
 export function getAttribution(): Record<string, string> {
   if (typeof window === "undefined") return {} as Record<string, string>;
   let previous: Record<string, string> = {};
-  try { previous = JSON.parse(sessionStorage.getItem("neuraforge_attribution") ?? "{}"); }
-  catch { sessionStorage.removeItem("neuraforge_attribution"); }
+  try {
+    const stored = JSON.parse(sessionStorage.getItem("neuraforge_attribution") ?? "{}");
+    if (stored && typeof stored === "object" && !Array.isArray(stored)) {
+      previous = Object.fromEntries(Object.entries(stored).filter(([, value]) => typeof value === "string")) as Record<string, string>;
+    }
+  } catch { /* Attribution must not prevent an enquiry when storage is unavailable. */ }
   const params = new URLSearchParams(window.location.search);
   const current: Record<string, string> = {};
   UTM_KEYS.forEach((key) => { const value = params.get(key); if (value) current[key] = value; });
@@ -36,6 +40,7 @@ export function getAttribution(): Record<string, string> {
     landing_page: previous.landing_page ?? `${window.location.pathname}${window.location.search}`,
     referrer: previous.referrer ?? document.referrer,
   };
-  sessionStorage.setItem("neuraforge_attribution", JSON.stringify(attribution));
+  try { sessionStorage.setItem("neuraforge_attribution", JSON.stringify(attribution)); }
+  catch { /* Continue without persisted attribution in restricted browsers. */ }
   return attribution;
 }

@@ -1,55 +1,9 @@
-import {
-  AccentItalic,
-  GlassCard,
-  GlowOrb,
-  NoiseLayer,
-  SectionHeading,
-} from "./primitives";
+import { ArrowUpRight, Globe2, MapPin } from "lucide-react";
+
+function Globe() {
+  return <div className="world-globe" aria-hidden="true"><svg viewBox="0 0 500 500" fill="none"><defs><clipPath id="globe-clip"><circle cx="250" cy="250" r="214" /></clipPath><pattern id="globe-dots" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.6" fill="currentColor" /></pattern></defs><circle cx="250" cy="250" r="214" fill="var(--surface-tone)" /><g clipPath="url(#globe-clip)" className="globe-grid"><ellipse cx="250" cy="250" rx="214" ry="75" /><ellipse cx="250" cy="250" rx="214" ry="153" /><ellipse cx="250" cy="250" rx="75" ry="214" /><ellipse cx="250" cy="250" rx="153" ry="214" /><path d="M36 250h428M250 36v428" /></g><g fill="url(#globe-dots)" clipPath="url(#globe-clip)"><path d="m171 149 27-19 38 5 17-21 45 5 20 26 38 9 31 34-20 20-29-7-12 21-32-4-20-18-25 15-40-9-26 8-19-24-17-15Z"/><path d="m198 226 38-17 32 16 33 5 29 40-20 21-5 40-24 37-20 21-23-19-9-40-21-19-13-36-14-26Z"/><path d="m52 108 39-23 37 6 32 31-7 36-24 22-4 32-26 8-23-22-11-33-25-15Z"/><path d="m102 239 34 9 29 32-7 30-23 27-12 43-18-12-6-47-18-34Z"/><path d="m360 346 33-23 35 13 19 33-23 18-30-7-23 13Z"/></g><path d="M221 276Q91 91 65 162M221 276Q365 45 426 184M221 276Q389 222 410 351" className="globe-route" /><circle cx="221" cy="276" r="9" fill="var(--accent)" stroke="var(--paper)" strokeWidth="4" /><circle cx="65" cy="162" r="5" fill="var(--accent-deep)" /><circle cx="426" cy="184" r="5" fill="var(--accent-deep)" /><circle cx="410" cy="351" r="5" fill="var(--accent-deep)" /></svg><span className="globe-location"><span />Accra, Ghana</span></div>;
+}
 
 export function Story() {
-  return (
-    <section
-      id="about"
-      className="relative isolate overflow-hidden section-pad-md"
-      style={{ scrollMarginTop: 96 }}
-    >
-      <GlowOrb
-        size={460}
-        color="rgba(175, 92, 65, 0.11)"
-        className="-top-24 -left-20"
-      />
-      <NoiseLayer />
-
-      <div className="container-page relative z-10 grid items-start gap-12 md:grid-cols-[5fr_7fr]">
-        <SectionHeading
-          eyebrow="About NeuraForge"
-          title={
-            <>
-              Engineering close to the <AccentItalic>business problem</AccentItalic>.
-            </>
-          }
-        />
-        <div>
-          <GlassCard className="p-8 md:p-10">
-            <div className="flex flex-col gap-5 text-[17px] leading-[1.75] text-ink-soft">
-              <p>
-                NeuraForge designs and builds software that helps businesses
-                operate, sell and scale. We work where customer experience,
-                internal operations and dependable engineering meet.
-              </p>
-              <p>
-                We partner with founders, product teams and operations leaders
-                who need software to fit the reality of their business. That
-                means understanding the workflow before prescribing the stack.
-              </p>
-              <p>
-                The people making product and engineering decisions stay close
-                to the work—from the first conversation through launch and handoff.
-              </p>
-            </div>
-          </GlassCard>
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="about" className="about-section section parallax-gradient"><div className="wrap"><div className="about-heading reveal"><h2>Built in Accra.<br />Ready for anywhere.</h2><p>A close-knit software team with a practical outlook.<br />We understand local businesses and build for a connected world.</p></div><div className="about-layout"><div className="about-aside reveal"><MapPin size={25} /><h3>Close to the work.</h3><p>We start with the people using the software. Their routines, their challenges and the things that would make a difference.</p><a className="text-link" href="#sectors">Who we build for <ArrowUpRight size={17} /></a></div><div className="reveal"><Globe /></div><div className="about-aside reveal"><Globe2 size={25} /><h3>Built to go further.</h3><p>Clear communication, thoughtful engineering and remote collaboration. The right partner can be close, wherever you are.</p><a className="text-link" href="#contact">Meet your next team <ArrowUpRight size={17} /></a></div></div><div className="about-facts reveal"><span>Accra, Ghana</span><span>Remote collaboration</span><span>Built for long-term ownership</span></div></div></section>;
 }

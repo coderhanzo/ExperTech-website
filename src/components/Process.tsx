@@ -1,101 +1,16 @@
-import {
-  AccentItalic,
-  GlassCard,
-  GlowOrb,
-  NoiseLayer,
-  SectionHeading,
-} from "./primitives";
+import { useState } from "react";
+import { ArrowUpRight, Check, Code2, MessagesSquare, Rocket } from "lucide-react";
+import { process } from "../data/site";
 
-const PHASES = [
-  {
-    step: "01",
-    title: "Understand",
-    body: "Map the users, operating reality, constraints and commercial outcome before prescribing a system.",
-    dur: "Context",
-  },
-  {
-    step: "02",
-    title: "Define",
-    body: "Turn the problem into a focused scope, delivery plan and technical approach with risks made visible.",
-    dur: "Scope",
-  },
-  {
-    step: "03",
-    title: "Build",
-    body: "Deliver working slices, review them in context and adjust with evidence instead of waiting for a final reveal.",
-    dur: "Delivery",
-  },
-  {
-    step: "04",
-    title: "Operate",
-    body: "Launch with documentation, monitoring and a clear path for ownership, support and the next release.",
-    dur: "Ownership",
-  },
-] as const;
-
+const icons = [MessagesSquare, Code2, Rocket];
 export function Process() {
-  return (
-    <section
-      id="process"
-      className="relative isolate overflow-hidden section-pad-md"
-      style={{ scrollMarginTop: 96 }}
-    >
-      <GlowOrb
-        size={500}
-        color="rgba(175, 92, 65, 0.08)"
-        className="-bottom-20 right-1/4"
-      />
-      <NoiseLayer />
-
-      <div className="container-page relative z-10">
-        <SectionHeading
-          eyebrow="How we work"
-          title={
-            <>
-              Clear decisions. <AccentItalic>Visible progress</AccentItalic>.
-            </>
-          }
-          description="The shape changes with the engagement; the discipline does not. You see what is being decided, built and learned throughout."
-        />
-
-        <div className="relative mt-14">
-          {/* Connector line */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-accent/35 to-transparent xl:block"
-          />
-
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {PHASES.map((p) => (
-              <GlassCard
-                key={p.step}
-                as="article"
-                interactive
-                className="px-7 pt-7 pb-8"
-              >
-                <div className="flex items-baseline justify-between">
-                  <span className="inline-flex h-7 items-center rounded-full bg-accent/12 px-3 text-[11px] font-medium uppercase tracking-[0.18em] text-accent">
-                    Phase {p.step}
-                  </span>
-                  <span className="text-[11px] uppercase tracking-[0.14em] text-muted">
-                    {p.dur}
-                  </span>
-                </div>
-
-                <h3 className="mt-7 font-serif text-[28px] font-normal tracking-[-0.025em] text-ink">
-                  {p.title}
-                </h3>
-
-                <div className="hairline mt-4" />
-
-                <p className="mt-4 text-[15px] leading-[1.7] text-muted">
-                  {p.body}
-                </p>
-              </GlassCard>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  const [active, setActive] = useState(0);
+  const current = process[active];
+  const Icon = icons[active];
+  return <section id="process" className="process-section section parallax-gradient">
+    <div className="wrap"><div className="process-heading reveal"><h2>A clear path.<br />From idea to everyday.</h2><p>Good software starts with a good conversation.<br />Here’s what happens after that.</p></div>
+      <div className="process-layout"><div className="process-orbit reveal"><div className="orbit-line orbit-outer" /><div className="orbit-line orbit-inner" /><div className="orbit-center"><span className="orbit-symbol"><Icon size={37} strokeWidth={1.4} /></span><strong>{current.name}</strong><span>Built together.</span></div>{process.map((step, index) => { const StepIcon = icons[index]; return <button key={step.name} className={`orbit-step step-${index} ${active === index ? "active" : ""}`} aria-pressed={active === index} onClick={() => setActive(index)}><StepIcon size={18} />{step.name}{active === index && <Check size={14} />}</button>; })}<span className="orbit-dot dot-a" /><span className="orbit-dot dot-b" /></div>
+      <div className="process-copy reveal" aria-live="polite"><h3>{current.title}</h3><p>{current.description}</p><div className="process-deliverable"><Check size={18} />{current.deliverable}</div><a className="text-link" href="#contact">Start the conversation<ArrowUpRight size={18} /></a></div></div>
+    </div>
+  </section>;
 }
